@@ -6,7 +6,6 @@ import pandas as pd
 import sys
 sys.path.append("..")
 from utils.imutils import jimshow as show
-from utils.imutils import jimshow_channel as show_channel
 import matplotlib.pyplot as plt
 
 # %%
