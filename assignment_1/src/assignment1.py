@@ -67,3 +67,5 @@ if __name__ == "__main__":
     main("../in", "../out", 1356)
 
 # %%
+
+# Note for later, there are to text files in the folder, make a statement which checks if the file is a jpg format
