@@ -17,7 +17,7 @@ git clone https://github.com/trinerye/visual_analytics_2024.git
 cd assignment_2/src
 ```
 
-3. Before running the script make sure to install opencv-python, matplotlib, numpy,scikit-learn and tensorflow in the requirements.txt file by running the setup.sh 
+3. Before running the script make sure to install opencv-python, matplotlib, numpy,scikit-learn and tensorflow in the ``requirements.txt`` file by running the ``setup.sh``
 ```sh
 bash setup.sh
 ```
