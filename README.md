@@ -1,4 +1,7 @@
 # visual_analytics_2024
-Coursework for VA
 
-This is a test
+### Assignment 1: Simple image search algorithm
+
+### Assignment 2: Classification benchmarks with Logistic Regression and Neural Networks
+
+

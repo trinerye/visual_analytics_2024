@@ -13,7 +13,7 @@ git clone https://github.com/trinerye/visual_analytics_2024.git
 
 2. Change directory to the assignment folder 
 ```sh
-cd assignment1
+cd assignment_1
 ```
 
 3. Before running the script make sure to install opencv-python, matplotlib, pandas, and numpy by running the setup.sh in the terminal.
