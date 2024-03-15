@@ -3,7 +3,7 @@
 ## Description of the assignment
 This project uses scikit-learn to classify images in the Cifar10 dataset, which are preprocessed (greyscaled, normalized, and reshaped) before classification. 
 
-In the ´´src´´ folder you will find two python scripts: one for training the logistic regression classifier and another which trains the neural network classifier. Each script produces a classification reports, which are saved in the out folder, but the loss curve plot only applies to the neural network. Each trained model is saved in the ´´models´´ folder.  
+In the ``src`` folder you will find two python scripts: one for training the logistic regression classifier and another which trains the neural network classifier. Each script produces a classification reports, which are saved in the out folder, but the loss curve plot only applies to the neural network. Each trained model is saved in the ``models`` folder.  
 
 ## Installation
 
@@ -12,7 +12,7 @@ In the ´´src´´ folder you will find two python scripts: one for training the
 git clone https://github.com/trinerye/visual_analytics_2024.git
 ```
 
-2. Change directory to ´´src´´ in the assignment folder 
+2. Change directory to ``src`` in the assignment folder 
 ```sh
 cd assignment_2/src
 ```
