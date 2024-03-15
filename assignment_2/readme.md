@@ -12,17 +12,18 @@ In the ´´src´´ folder you will find two python scripts: one for training the
 git clone https://github.com/trinerye/visual_analytics_2024.git
 ```
 
-2. Change directory to the assignment folder 
+2. Change directory to ´´src´´ in the assignment folder 
 ```sh
-cd assignment_2
+cd assignment_2/src
 ```
 
-3. Before running the script make sure to install opencv-python, matplotlib, numpy,scikit-learn and tensorflowby running the setup.sh in the terminal.
+3. Before running the script make sure to install opencv-python, matplotlib, numpy,scikit-learn and tensorflowby in the requirements.txt file by running the setup.sh 
 ```sh
 bash setup.sh
 ```
 
 4. To execute the code run the python script in the terminal
 ```sh
-python src/assignment1.py 
+python logistic_regression.py
+python neural_network.py 
 ```
