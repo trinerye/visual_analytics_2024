@@ -6,7 +6,6 @@ python -m venv A1_env
 source ./A1_env/bin/activate
 ## install requirements
 pip install --upgrade pip
-pip freeze > requirements.txt
 pip install -r requirements.txt
 ## deactivate env
 deactivate 
