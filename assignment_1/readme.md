@@ -20,12 +20,22 @@ cd assignment_1
 ```sh
 bash setup.sh
 ```
-4. To activate the environment and run the main script, simply run the run script.
+
+4. Activate the environment and run the main script. Be aware that it deactivates the environment again after running the  script.
 ```sh
 bash run.sh
 ```
-
+```sh
+# Activate the environment (Unix/macOS)
+source ./A1_env/bin/activate
+# Run the code
+python src/image_search_algorithm.py --image "image_1357.jpg" --print_results 
+# Deactivate the enviroment
+deactivate
+```
 ## Usage
+
+Write something about the flags here
 
 ```sh
 
