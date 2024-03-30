@@ -16,26 +16,17 @@ git clone https://github.com/trinerye/visual_analytics_2024.git
 cd assignment_1
 ```
 
-3. Before running the script make sure to install opencv-python, matplotlib, pandas, and numpy by running the setup.sh in the terminal.
+3. Before running the script make sure to install opencv-python, pandas, and numpy by running the setup.sh using a bash terminal. It simutanously create a virtual enviroment which contains the package versions used to make this script. 
 ```sh
 bash setup.sh
 ```
-4. To run the code open assignment1.ipynb and run all.
+4. To run the script run the run.sh file from the same bash terminal 
 ```sh
-assignment1.ipynb
+bash run.sh
 ```
 
 ## Usage
-The main function takes three parameters - the in_folderpath (the in folder),  the out_folderpath (the out folder), and an integer referring to the number of the chosen flower. 
-
-***Important**: the image_index starts at zero, so if you want to compare image number 1357 as I did, the argument given to the function is 1356.
-
-Also, if you structure the folders differently, remember to update the file paths accordingly.
 
 ```sh
-def main(in_folderpath, out_folderpath, image_index):
 
-if __name__ == "__main__":
-
- main("../in", "../out", 1356)
 ```

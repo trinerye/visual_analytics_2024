@@ -1,6 +1,12 @@
-sudo apt-get update
+# Run setup from assignment 1 folder 
 
-sudo apt-get install -y python3-opencv
-
-pip install opencv-python matplotlib pandas numpy 
-
+## create virtual env
+python -m venv A1_env
+## activate env
+source ./A1_env/bin/activate
+## install requirements
+pip install --upgrade pip
+pip freeze > requirements.txt
+pip install -r requirements.txt
+## deactivate env
+deactivate 
