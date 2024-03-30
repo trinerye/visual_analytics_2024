@@ -6,7 +6,7 @@ This project uses OpenCV and the ’17 Category Flower Dataset’ to create a si
 
 ## Installation
 
- 1. Clone the repository using Git 
+ 1. Open a terminal and clone the repository using Git 
 ```sh
 git clone https://github.com/trinerye/visual_analytics_2024.git
 ```
@@ -16,11 +16,11 @@ git clone https://github.com/trinerye/visual_analytics_2024.git
 cd assignment_1
 ```
 
-3. Before running the script make sure to install opencv-python, pandas, and numpy by running the setup.sh using a bash terminal. It simutanously create a virtual enviroment which contains the package versions used to make this script. 
+3. Run the setup script to install opencv-python, pandas, and numpy. It simultaneously creates a virtual environment containing the specific versions used to develop this project. 
 ```sh
 bash setup.sh
 ```
-4. To run the script run the run.sh file from the same bash terminal 
+4. To activate the environment and run the main script, simply run the run script.
 ```sh
 bash run.sh
 ```
