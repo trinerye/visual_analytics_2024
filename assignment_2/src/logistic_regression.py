@@ -14,9 +14,6 @@ from joblib import dump
 
 from tensorflow.keras.datasets import cifar10
 
-# plotting tool
-import matplotlib.pyplot as plt
-
 # This function loads the data from the cifar10 dataset
 def load_data():
     return cifar10.load_data()
@@ -52,18 +49,18 @@ def saving_report(classifier_metrics, classifier, report_path, model_path):
     joblib.dump(classifier, model_path)
 
 def main():
+
     # Creates a filepath for each directory 
-    out_folder_path = os.path.join("..", "out", "logistic_regression")
-    models_folder_path = os.path.join("..","models", "logistic_regression")
+    out_folderpath = os.path.join("out", "logistic_regression")
+    models_folderpath = os.path.join("models", "logistic_regression")
 
     # If the directory does not exist, make the directory
-    os.makedirs(out_folder_path, exist_ok=True)
-    os.makedirs(models_folder_path, exist_ok=True)
+    os.makedirs(out_folderpath, exist_ok=True)
+    os.makedirs(models_folderpath, exist_ok=True)
 
     # Filepath for each saved file
-    model_path = os.path.join("..", "models", "logistic_regression", "regression_classifier.joblib")
-    report_path = os.path.join("..","out", "logistic_regression", "classification_report.txt")
-    # plot_path = os.path.join("..","out", "logistic_regression", "_______")
+    model_path = os.path.join(models_folderpath, "regression_classifier.joblib")
+    report_path = os.path.join(out_folderpath, "classification_report.txt")
   
     # Loading the data
     (X_train, y_train), (X_test, y_test) = load_data()

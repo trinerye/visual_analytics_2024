@@ -50,18 +50,20 @@ def saving_report(classifier_metrics, classifier, report_path, model_path):
     joblib.dump(classifier, model_path)
 
 def main():
+   
     # Creates a filepath for each directory 
-    out_folder_path = os.path.join("..", "out", "neural_network")
-    models_folder_path = os.path.join("..","models", "neural_network")
+    out_folderpath = os.path.join("out", "neural_network")
+    models_folderpath = os.path.join("models", "neural_network")
 
     # If the directory does not exist, make the directory
-    os.makedirs(out_folder_path, exist_ok=True)
-    os.makedirs(models_folder_path, exist_ok=True)
+    os.makedirs(out_folderpath, exist_ok=True)
+    os.makedirs(models_folderpath, exist_ok=True)
 
     # Filepath for each saved file
-    model_path = os.path.join("..", "models", "neural_network", "neural_network_classifier.joblib")
-    report_path = os.path.join("..","out", "neural_network", "classification_report.txt")
-    plot_path = os.path.join("..","out", "neural_network", "loss_curve.png")
+    model_path = os.path.join(models_folderpath, "neural_network_classifier.joblib")
+    report_path = os.path.join(out_folderpath, "classification_report.txt")
+    plot_path = os.path.join(out_folderpath, "loss_curve.png")
+
   
     # Loading the data
     (X_train, y_train), (X_test, y_test) = load_data()

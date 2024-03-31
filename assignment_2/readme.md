@@ -3,27 +3,35 @@
 ## Description of the assignment
 This project uses scikit-learn to classify images in the Cifar10 dataset, which are preprocessed (greyscaled, normalized, and reshaped) before classification. 
 
-In the ``src`` folder you will find two python scripts: one for training the logistic regression classifier and another which trains the neural network classifier. Each script produces a classification reports, which are saved in the out folder, but the loss curve plot only applies to the neural network. Each trained model is saved in the ``models`` folder.  
+In the ``src`` folder, you will find two Python scripts: one for training the logistic regression classifier and another for training the neural network classifier. Each script produces a classification report, saved in the ``out`` folder, while the trained models are saved in the ``models`` folder."You can also find an additional plot of the loss curve, which illustrates the neural network's performance, in the ``out`` folder. 
 
 ## Installation
 
- 1. Clone the repository using Git
+ 1. Open a terminal and clone the repository using Git 
 ```sh
 git clone https://github.com/trinerye/visual_analytics_2024.git
 ```
 
-2. Change directory to ``src`` in the assignment folder 
+2. Change directory to the assignment folder 
 ```sh
-cd assignment_2/src
+cd assignment_1
 ```
 
-3. Before running the script make sure to install opencv-python, matplotlib, numpy,scikit-learn and tensorflow in the ``requirements.txt`` file by running the ``setup.sh``
+3. Run the setup script to install opencv-python, pandas, and numpy. It simultaneously creates a virtual environment containing the specific versions used to develop this project. 
 ```sh
 bash setup.sh
 ```
 
-4. To execute the code run the python script in the terminal
+4. Activate the environment and run the main script. Be aware that it deactivates the environment again after running the  script.
 ```sh
-python logistic_regression.py
-python neural_network.py 
+bash run.sh
+```
+```sh
+# Activate the environment (Unix/macOS)
+source ./A1_env/bin/activate
+# Run the code
+python src/logistic_regression.py &
+python src/neural_network.py 
+# Deactivate the enviroment
+deactivate
 ```

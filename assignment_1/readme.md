@@ -1,7 +1,7 @@
 # Assignment 1: Simple image search algorithm
 
 ## Description of the assignment
-This project uses OpenCV and the ’17 Category Flower Dataset’ to create a simple image search algorithm, which compares a ‘target flower’ to the rest of the dataset. It does so by creating a normalized colour histogram of each flower, comparing it to that of the target flower, displaying the top five flowers and saving the results as a CSV file in the out folder. 
+This project uses OpenCV and the ’17 Category Flower Dataset’ to create a simple image search algorithm, which compares a ‘target flower’ to the rest of the dataset. It does so by creating a normalized colour histogram of each flower, comparing it to that of the target flower, displaying the top five flowers and saving the results as a CSV file in the ``out`` folder. 
 
 
 ## Installation
