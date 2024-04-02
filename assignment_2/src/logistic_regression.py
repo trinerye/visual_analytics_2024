@@ -39,14 +39,14 @@ def evaluate_model(y_test_processed, X_test_processed, classifier, labels):
     return metrics.classification_report(y_test_processed, classifier.predict(X_test_processed), target_names=labels)
 
 # This function saves the classification report and the logistic regression classifier model
-def saving_report(classifier_metrics, classifier, report_path, model_path):
+def saving_report(classifier_metrics, classifier, report_path, classifier_path):
 
     # Opens the file in the out folder in write mode and writes the classification metrics to it.
     with open(report_path, "w") as file:
         file.write(classifier_metrics)
 
     # Saves the trained classifier in the models folder
-    joblib.dump(classifier, model_path)
+    joblib.dump(classifier, classifier_path)
 
 def main():
 
@@ -59,7 +59,7 @@ def main():
     os.makedirs(models_folderpath, exist_ok=True)
 
     # Filepath for each saved file
-    model_path = os.path.join(models_folderpath, "regression_classifier.joblib")
+    classifier_path = os.path.join(models_folderpath, "regression_classifier.joblib")
     report_path = os.path.join(out_folderpath, "classification_report.txt")
   
     # Loading the data
@@ -81,7 +81,7 @@ def main():
     classifier_metrics = evaluate_model(y_test_processed, X_test_processed, classifier, labels)
 
     # Saving the classification report and the logistic regression classifier model
-    saving_report(classifier_metrics, classifier, report_path, model_path)
+    saving_report(classifier_metrics, classifier, report_path, classifier_path)
 
 if __name__ == "__main__":
     main()

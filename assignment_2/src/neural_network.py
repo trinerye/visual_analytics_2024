@@ -40,14 +40,14 @@ def plot_loss_curve(classifier, plot_path):
     plt.savefig(plot_path)
     
 # This function saves the classification report and the logistic regression classifier model
-def saving_report(classifier_metrics, classifier, report_path, model_path):
+def saving_report(classifier_metrics, classifier, report_path, classifier_path):
 
     # Opens the file in the out folder in write mode and writes the classification metrics to it.
     with open(report_path, "w") as file:
         file.write(classifier_metrics)
     
     # Saves the trained classifier in the models folder
-    joblib.dump(classifier, model_path)
+    joblib.dump(classifier, classifier_path)
 
 def main():
    
@@ -60,10 +60,9 @@ def main():
     os.makedirs(models_folderpath, exist_ok=True)
 
     # Filepath for each saved file
-    model_path = os.path.join(models_folderpath, "neural_network_classifier.joblib")
+    classifier_path = os.path.join(models_folderpath, "neural_network_classifier.joblib")
     report_path = os.path.join(out_folderpath, "classification_report.txt")
     plot_path = os.path.join(out_folderpath, "loss_curve.png")
-
   
     # Loading the data
     (X_train, y_train), (X_test, y_test) = load_data()
@@ -87,7 +86,7 @@ def main():
     plot_loss_curve(classifier, plot_path)
 
     # Saving the classification report and the neural network model
-    saving_report(classifier_metrics, classifier, report_path, model_path)
+    saving_report(classifier_metrics, classifier, report_path, classifier_path)
 
 if __name__ == "__main__":
     main()
