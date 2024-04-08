@@ -24,14 +24,12 @@ def parser():
 
     return parser.parse_args()
 
-
 # This function reads the chosen image and creates a normalized color histogram of it.
 def create_chosen_hist(chosen_image_path):  
     chosen_image = cv2.imread(chosen_image_path)
     chosen_image_hist = cv2.calcHist([chosen_image], [0,1,2], None, [256,256,256], [0,256, 0,256, 0,256])
     chosen_norm_hist = cv2.normalize(chosen_image_hist, chosen_image_hist, 0, 1.0, cv2.NORM_MINMAX)
     return chosen_norm_hist
-
 
 # This function reads all the images, creates the corresponding color histograms and normalizes them.
 # Afterwards it compares each normalized histogram with that of the chosen image and saves the image name and
@@ -68,6 +66,9 @@ def save_results(in_folderpath, out_folderpath, image_names, results, args):
 
         # If the print_results flag is added then save the similar images to the 'out' folder and print a message to the screen
         if args.print_results:
+
+            # If the directory does not exist, make the directory
+            os.makedirs(out_folderpath, exist_ok=True)
   
             cv2.imwrite(os.path.join(out_folderpath, sorted_image_names), sorted_image)
 
@@ -86,13 +87,8 @@ def main():
     # Calls the parser function
     args = parser()
 
-    # Creates 'out' folderpath
+    # Creates the folderpaths
     out_folderpath = os.path.join("out")
-
-    # If the directory does not exist, make the directory
-    os.makedirs(out_folderpath, exist_ok=True)
-
-    # Creates 'in' folderpath
     in_folderpath = os.path.join("in")
 
     # Creates a sorted list of all the directories within the given folder path
