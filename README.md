@@ -4,4 +4,7 @@
 
 ### Assignment 2: Classification benchmarks with Logistic Regression and Neural Networks
 
+### Assignment 3: Transfer learning with pretrained CNNs
+
+
 
