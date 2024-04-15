@@ -3,8 +3,10 @@ import cv2
 from tensorflow.keras.datasets import cifar10
 
 # This function loads the data from the cifar10 dataset
-def load_data():
+def load_data():   
     return cifar10.load_data()
+
+
 
 # This function preprocesses the images (X) and labels (y)
 def preprocess_images(images, labels): 

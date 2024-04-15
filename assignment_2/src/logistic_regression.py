@@ -45,7 +45,7 @@ def main():
     # Loading the data
     print("Loading data")
     (X_train, y_train), (X_test, y_test) = load_data()
-
+ 
     # List of labels
     unique_labels = ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"]
 
