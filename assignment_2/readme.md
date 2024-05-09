@@ -14,7 +14,7 @@ git clone https://github.com/trinerye/visual_analytics_2024.git
 
 2. Change directory to the assignment folder 
 ```sh
-cd assignment_1
+cd assignment_2
 ```
 
 3. Run the setup script to install opencv-python, pandas, and numpy. It simultaneously creates a virtual environment containing the specific versions used to develop this project. 
@@ -28,7 +28,7 @@ bash run.sh
 ```
 ```sh
 # Activate the environment (Unix/macOS)
-source ./A1_env/bin/activate
+source ./A2_env/bin/activate
 # Run the code
 python src/logistic_regression.py &
 python src/neural_network.py 
