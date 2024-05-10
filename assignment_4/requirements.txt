@@ -1,0 +1,15 @@
+facenet-pytorch
+matplotlib
+numpy
+pandas
+Pillow
+tensorflow
+tensorflow_hub
+tf-keras
+torch
+tqdm
+transformers
+
+
+
+
