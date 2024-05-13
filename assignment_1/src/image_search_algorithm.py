@@ -31,10 +31,14 @@ def create_histogram(image_path):
 # Afterwards it compares each normalized histogram with that of the chosen image and saves the image name and
 # result in the appropriate list
 
-def compare_histograms(in_folderpath, dirs, chosen_norm_hist):
+def compare_histograms(in_folderpath, chosen_norm_hist):
+    
+    # Creates a sorted list of all the directories within the given folder path
+    dirs = sorted(os.listdir(in_folderpath))
 
     filenames = []
     distances = []
+
     for image in tqdm(dirs):
         filenames.append(image)
         image_path = os.path.join(in_folderpath, image)
@@ -86,17 +90,14 @@ def main():
     out_folderpath = os.path.join("out", "cv2_images")
     in_folderpath = os.path.join("in", "flowers")
 
-    # Creates a sorted list of all the directories within the given folder path
-    dirs = sorted(os.listdir(in_folderpath))
-
-    # Folderpath of the chosen image
+    # Folderpath for the chosen image
     chosen_image_path = os.path.join(in_folderpath, args.image)
 
     # Passing the chosen_image_path as an argument to the create_histogram function
     chosen_norm_hist = create_histogram(chosen_image_path)
 
     # Calling the function which compares the chosen images with the entire image dataset
-    filenames, distances = compare_histograms(in_folderpath, dirs, chosen_norm_hist)
+    filenames, distances = compare_histograms(in_folderpath, chosen_norm_hist)
 
     # Calling the function which saves the images_names and results in a dataframe and turns it int a CSV
     save_result(in_folderpath, out_folderpath, filenames, distances, args)
