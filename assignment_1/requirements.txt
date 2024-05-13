@@ -1,4 +1,8 @@
 matplotlib==3.8.3
 numpy==1.26.4
-opencv-python==4.9.0.80
+opencv-python
 pandas==2.2.1
+scikit-learn
+tensorflow
+tensorflow_hub
+tqdm
