@@ -6,13 +6,13 @@ In the ``src`` folder, you will find two scripts: one for training the logistic 
 
 ## Usage 
 
-You do not need a data folder for this repository as the cifar-10 dataset can be downloaded from the ``tensorflow.keras.datasets`` the following way:
+You do not need a data folder for this repository as the cifar-10 dataset can be downloaded from the ``tensorflow.keras.datasets`` as follows:
 
 ```sh
 from tensorflow.keras.datasets import cifar10
 (X_train, y_train), (X_test, y_test) = cifar10.load_data()
 ```
-See here to read more about the cifar-10 dataset.
+Read more about the cifar-10 dataset here
 
 ###  :file_folder: File Structure
 
@@ -39,9 +39,7 @@ See here to read more about the cifar-10 dataset.
         ├── requirements.txt
         ├── run.sh
         └── setup.sh
-
 ```
-
 
 ###  :electric_plug: Installation
 
