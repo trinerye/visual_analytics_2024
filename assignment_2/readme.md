@@ -1,9 +1,16 @@
 # Assignment 2: Classification benchmarks with Logistic Regression and Neural Networks
 
-## Description of the assignment
-This project uses scikit-learn to classify images in the Cifar10 dataset, which are preprocessed (greyscaled, normalized, and reshaped) before classification. 
+This project uses ``scikit-learn`` to classify images from the ``Cifar-10`` dataset, which consists of 60000 images divided into a predefined train/test split. However, before classification, the images are preprocessed (greyscaled, normalized, and reshaped) to fit the requirements of the ``LogisticRegression()`` and ``MLPClassifier()`` classifiers.
+You do not need a data folder for this repository as the cifar-10 dataset can be downloaded from the ``tensorflow.keras.datasets`` the following way:
 
-In the ``src`` folder, you will find two Python scripts: one for training the logistic regression classifier and another for training the neural network classifier. Each script produces a classification report, saved in the ``out`` folder, while the trained models are saved in the ``models`` folder."You can also find an additional plot of the loss curve, which illustrates the neural network's performance, in the ``out`` folder. 
+```sh
+from tensorflow.keras.datasets import cifar10
+(X_train, y_train), (X_test, y_test) = cifar10.load_data()
+```
+See here to read more about the cifar-10 dataset.
+
+In the ``src`` folder, you will find two scripts: one for training the logistic regression classifier and another for training the neural network classifier. Each script also produces a classification report, saved in the ou``out`` folder, with an additional plot of the loss curve illustrating the neural network classifier's performance. Also, the trained models and vectorizer can be found in the ``models`` folder to ensure reproducibility. 
+
 
 ## Installation
 

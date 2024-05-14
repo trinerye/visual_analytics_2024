@@ -1,7 +1,6 @@
 import os
 from sklearn import metrics
 from sklearn.neural_network import MLPClassifier
-from tensorflow.keras.datasets import cifar10
 import matplotlib.pyplot as plt
 import joblib
 from joblib import dump
