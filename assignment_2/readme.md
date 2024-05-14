@@ -18,7 +18,7 @@ See here to read more about the cifar-10 dataset.
 
 ```
 .
-└── assignment_1
+└── assignment_2
         |
         ├── models
         │   ├── insert here
@@ -39,7 +39,7 @@ See here to read more about the cifar-10 dataset.
         ├── requirements.txt
         ├── run.sh
         └── setup.sh
-            
+
 ```
 
 
