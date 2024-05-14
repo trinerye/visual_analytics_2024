@@ -17,7 +17,6 @@ Read more about the cifar-10 dataset here
 ###  :file_folder: File Structure
 
 ```
-.
 └── assignment_2
         |
         ├── models
