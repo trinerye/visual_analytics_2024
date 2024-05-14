@@ -1,10 +1,11 @@
 # Assignment 2: Classification benchmarks with Logistic Regression and Neural Networks
 
-This project uses ``scikit-learn`` to classify images from the ``Cifar-10`` dataset that are preprocessed (greyscaled, normalized, and reshaped) to fit the requirements of the ``LogisticRegression()`` and ``MLPClassifier()`` classifiers.
+This project uses ``scikit-learn`` to classify images from the ``Cifar-10`` dataset which have been preprocessed (greyscaled, normalized, and reshaped) to fit the requirements of the ``LogisticRegression()`` and ``MLPClassifier()`` classifiers. 
+
+In the ``src`` folder, you will find two scripts: one for training the logistic regression classifier and another for training the neural network classifier. Each script also produces a classification report, saved in the ou``out`` folder, with an additional plot of the loss curve illustrating the neural network classifier's performance. Also, the trained models and vectorizer can be found in the ``models`` folder to ensure reproducibility. 
 
 ## Usage 
 
-Divided into a predefined train/test split. 
 You do not need a data folder for this repository as the cifar-10 dataset can be downloaded from the ``tensorflow.keras.datasets`` the following way:
 
 ```sh
@@ -13,9 +14,33 @@ from tensorflow.keras.datasets import cifar10
 ```
 See here to read more about the cifar-10 dataset.
 
-In the ``src`` folder, you will find two scripts: one for training the logistic regression classifier and another for training the neural network classifier. Each script also produces a classification report, saved in the ou``out`` folder, with an additional plot of the loss curve illustrating the neural network classifier's performance. Also, the trained models and vectorizer can be found in the ``models`` folder to ensure reproducibility. 
-
 ###  :file_folder: File Structure
+
+```
+.
+└── assignment_1
+        |
+        ├── models
+        │   ├── insert here
+        │   └── insert here
+        │      
+        ├── out
+        │   ├── logistic_regression_classification_report.txt
+        |   ├── neural_network_classification_report.txt
+        |   └── loss_curve.png
+        |
+        ├── src
+        │   ├── logistic_regression.py
+        │   ├── neural_network.py
+        │   └── preprocess_images.py
+        │     
+        ├── .gitignore
+        ├── README.md
+        ├── requirements.txt
+        ├── run.sh
+        └── setup.sh
+            
+```
 
 
 ###  :electric_plug: Installation
