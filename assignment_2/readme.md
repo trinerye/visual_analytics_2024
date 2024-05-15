@@ -1,18 +1,25 @@
 # Assignment 2: Classification benchmarks with Logistic Regression and Neural Networks
 
+## About
+
 This project uses ``scikit-learn`` to classify images from the ``Cifar-10`` dataset which have been greyscaled, normalized, and reshaped to fit the requirements of the ``LogisticRegression()`` and ``MLPClassifier()`` classifiers. 
 
-In the ``src`` folder, you will find two scripts: one for training the logistic regression classifier and another for training the neural network classifier. Each script also produces a classification report, saved in the ou``out`` folder, with an additional plot of the loss curve illustrating the neural network classifier's performance. Also, the trained models and vectorizer can be found in the ``models`` folder to ensure reproducibility. 
+There are two scripts in the ``src`` folder, one for training the logistic regression classifier and another for training the neural network classifier. Each script generates a detailed classification report stored in the ``out`` folder with an additional plot of the neural network classifier's loss curve illustrating its performance. Lastly, the trained models and the vectorizer are stored in the ``models`` folder to ensure reproducibility.
 
-## Usage 
+### Data
 
 You do not need a data folder for this repository as the cifar-10 dataset can be downloaded from the ``tensorflow.keras.datasets`` as follows:
 
 ```sh
 from tensorflow.keras.datasets import cifar10
+
 (X_train, y_train), (X_test, y_test) = cifar10.load_data()
 ```
 Read more about the cifar-10 dataset here
+
+### Model
+
+## Setup
 
 ###  :file_folder: File Structure
 
@@ -57,6 +64,10 @@ cd assignment_2
 bash setup.sh
 ```
 
+### Pre-Requisites
+
+### Commands
+
 4. Activate the environment and run the main script. Be aware that it deactivates the environment again after running the  script.
 ```sh
 bash run.sh
@@ -70,3 +81,25 @@ python src/neural_network.py
 # Deactivate the enviroment
 deactivate
 ```
+
+## Usage
+
+Write about how to use the flags
+
+### Command Line Interface Arguments 
+
+```
+Options:
+  -a, --AAA         Write a short description here
+  -b, --BBB         Write a short description here
+  -c, --CCC         Write a short description here
+  -h, --help        Show help [boolean]
+
+```
+
+| Flag |  | Description 
+|----|------------|-------|
+| -a  | --AAA | Write a short description here |
+
+
+## Resources
