@@ -19,6 +19,8 @@ Read more about the cifar-10 dataset here
 
 ### Model
 
+Describe the models here
+
 ## Setup
 
 ###  :file_folder: File Structure
