@@ -64,14 +64,21 @@ cd assignment_2
 bash setup.sh
 ```
 
+Write something about how it creates and environment 
+
 ### Pre-Requisites
+
+the requirements file
 
 ### Commands
 
-4. Activate the environment and run the main script. Be aware that it deactivates the environment again after running the  script.
+How to run it
+
 ```sh
 bash run.sh
 ```
+Activate the environment and run the main script. Be aware that it deactivates the environment again after running the  script.
+
 ```sh
 # Activate the environment (Unix/macOS)
 source ./A2_env/bin/activate
@@ -89,17 +96,11 @@ Write about how to use the flags
 ### Command Line Interface Arguments 
 
 ```
-Options:
   -a, --AAA         Write a short description here
   -b, --BBB         Write a short description here
   -c, --CCC         Write a short description here
   -h, --help        Show help [boolean]
 
 ```
-
-| Flag |  | Description 
-|----|------------|-------|
-| -a  | --AAA | Write a short description here |
-
 
 ## Resources
