@@ -13,7 +13,7 @@ def parser():
                         required = True,
                         help="Filename of the chosen image, e.g., 'image_0001.jpg'")
                         
-    parser.add_argument("--print_results",
+    parser.add_argument("--print",
                         "-p",
                         action="store_true",
                         help="Saves the most similar images to the chosen image in the out folder if this flag is added.")
@@ -27,13 +27,8 @@ def create_histogram(image_path):
     norm_hist = cv2.normalize(hist, hist, 0, 1.0, cv2.NORM_MINMAX)
     return norm_hist
 
-# This function reads all the images, creates the corresponding color histograms and normalizes them.
-# Afterwards it compares each normalized histogram with that of the chosen image and saves the image name and
-# result in the appropriate list
-
 def compare_histograms(in_folderpath, chosen_norm_hist):
     
-    # Creates a sorted list of all the directories within the given folder path
     dirs = sorted(os.listdir(in_folderpath))
 
     filenames = []
@@ -47,39 +42,36 @@ def compare_histograms(in_folderpath, chosen_norm_hist):
         distances.append(comparison)
     return filenames, distances
 
-
 def save_result(in_folderpath, out_folderpath, filenames, distances, args):
 
     # Saves each image name and its corresponding result into a dataframe
     df = pd.DataFrame({'Filename': filenames,'Distance': distances})
 
     # Sorts the dataframe by "distance" saving the lowest six results 
-    df_sorted = df.sort_values(by=['Distance'], ascending=True).head(6)
+    sorted_df = df.sort_values(by=['Distance'], ascending=True).head(6)
 
     # Iterates over the elements in df_sorted, creates a folderpath for each image using the filename column, 
     # reads it and shows it
-    for i, row in df_sorted.iterrows():
-        sorted_filenames = row['Filename']
-        sorted_image_path = os.path.join(in_folderpath, sorted_filenames)
+    for filename in sorted_df['Filename']:
+
+        sorted_image_path = os.path.join(in_folderpath, filename)
+        
         sorted_images = cv2.imread(sorted_image_path)
 
         # If the print_results flag is added then save the similar images to the 'out' folder and print a message to the screen
-        if args.print_results:
+        if args.print:
 
-            # If the directory does not exist, make the directory
-            os.makedirs(out_folderpath, exist_ok=True)
-  
-            cv2.imwrite(os.path.join(out_folderpath, sorted_filenames), sorted_images)
+            cv2.imwrite(os.path.join(out_folderpath, filename), sorted_images)
 
-            print(f"Saving {sorted_filenames} in the 'out' folder")
+            print(f"Saving {filename} in the 'out' folder")
         
         else:
         # If not then print a message to the screen explaining how to add the flag
             print(f"To show the most similar images to '{args.image}', ensure you include the '--print_results' flag when executing this script.")
-            break
+        
 
     # Saves the sorted dataframe as a csv file in the out folder 
-    df_sorted.to_csv(os.path.join(out_folderpath, 'image_comparisons.csv'), index=False)
+    sorted_df.to_csv(os.path.join(out_folderpath, 'image_comparisons.csv'), index=False)
 
 def main():
 
@@ -87,9 +79,10 @@ def main():
     args = parser()
 
     # Creates the folderpaths
-    out_folderpath = os.path.join("out", "cv2_images")
     in_folderpath = os.path.join("in", "flowers")
-
+    out_folderpath = os.path.join("out", "cv2_images")
+    os.makedirs(out_folderpath, exist_ok=True)
+    
     # Folderpath for the chosen image
     chosen_image_path = os.path.join(in_folderpath, args.image)
 
