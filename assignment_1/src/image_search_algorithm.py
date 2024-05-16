@@ -50,8 +50,8 @@ def save_result(in_folderpath, out_folderpath, filenames, distances, args):
     # Sorts the dataframe by "distance" saving the lowest six results 
     sorted_df = df.sort_values(by=['Distance'], ascending=True).head(6)
 
-    # Iterates over the elements in df_sorted, creates a folderpath for each image using the filename column, 
-    # reads it and shows it
+    # Iterates over each filename in the dataframe and creates a folderpath for each image reads it and write it to the outfolder it
+    
     for filename in sorted_df['Filename']:
 
         sorted_image_path = os.path.join(in_folderpath, filename)
