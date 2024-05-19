@@ -1,141 +1,155 @@
 import os
-import sys
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import random
+import argparse
 from tqdm import tqdm
-from facenet_pytorch import MTCNN, InceptionResnetV1
-import torch
-from PIL import Image
-from PIL import ImageFile
+from facenet_pytorch import MTCNN
+from PIL import Image, ImageFile
+from plot_function import plot_results
+
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
-def create_dataframe(in_folderpath, out_folderpath, directory, mtcnn):
+def parser():
 
+     # Creates an argparse object 
+    parser = argparse.ArgumentParser()
+
+    # Defines the CLI argument that creates and saves a plot of the results (OPTIONAL)                    
+    parser.add_argument("--print",
+                        "-p",
+                        action="store_true",
+                        help="Include this flag to save an unedited version of the csv")
+
+    return parser.parse_args()  # Parses and returns the CLI arguments
+
+
+def extract_data(in_folderpath, directory, mtcnn):
+
+    # Creates a dictionary to store the data
+    data = {'Newspaper': [],'Year': [],'Month': [], 'Day': [],'Filename': [], 
+                'Faces':[],'Face Detected': [],'Pages': []} 
+
+    # Creates a sorted list of the content in each directory  
+    subdir = sorted(os.listdir(os.path.join(in_folderpath, directory))) 
+
+    # Itereates over each file in the directory
+    for file in tqdm(subdir, desc="Processing image"):
+
+        if file.endswith('jpg'):
+
+            # Creates a filepath for each file
+            filepath = os.path.join(in_folderpath, directory, file)
+
+            # Extracts the metadata from the filename
+            extract_metadata(file, data)
+
+            # Detects how many faces each file has
+            detect_faces(filepath, mtcnn, data)
+   
+    return data
+  
+def create_dataframe(out_folderpath, directory, data, args): 
+
+    # Creates a directory in the out folder for each directory 
     directory_folderpath = os.path.join(out_folderpath, directory)
-
     os.makedirs(directory_folderpath, exist_ok=True)
 
-    # dictionary = {'Newspaper': [],
-    #             'Year': [],
-    #             'Month': [], 
-    #             'Day': [], 
-    #             'Filename': [], 
-    #             'Detected Faces':[],
-    #             'Pages with Faces': [],
-    #             'Pages Total': []} 
+    # Turns the dictionary containing the data into a dataframe 
+    df = pd.DataFrame(data)
 
-    # subdir = sorted(os.listdir(os.path.join(in_folderpath, directory))) 
+    # Converts the values in the year column to integers 
+    df['Year'] = df['Year'].astype('int') 
 
-    # # test_subdir = random.choices(subdir, k=6)
+    # Calculates the decade for each year and saves the information in a new column
+    decade = np.round(df['Year']//10*10, decimals=0).astype('int') 
+    df.insert(1, 'Decade', decade)
 
-    # for file in tqdm(subdir, desc="Processing image"):
-
-    #     if file.endswith('jpg'):
-
-    #         filepath = os.path.join(in_folderpath, directory, file)
-
-    #         extract_metadata(file, dictionary)
-
-    #         detect_faces(filepath, mtcnn, dictionary)
-
-    # df = pd.DataFrame(dictionary)
-
-    # df['Year'] = df['Year'].astype('int') 
-
-    # df.to_csv(os.path.join(directory_folderpath, f"{directory}_newspaper.csv"), index=False)
+  # Saves an unedited version of the csv if the --print flag is added when running the script
+    if args.print:
+        df.to_csv(os.path.join(directory_folderpath, f"{directory}_newspaper.csv"), index=False)
+    else: 
+        print(f"Include the --print flag to save an unedited version of the csv")
     
-    return directory_folderpath
+    return directory_folderpath, df
 
-
-def extract_metadata(file, dictionary):
+def extract_metadata(file, data):
+    
+    # Splits the filename into seperate entities 
     split_file = file.split("-")
-    dictionary['Newspaper'].append(split_file[0])
-    dictionary['Year'].append(split_file[1])
-    dictionary['Month'].append(split_file[2])
-    dictionary['Day'].append(split_file[3])
-    dictionary['Filename'].append(split_file[5])
-    dictionary['Pages Total'].append(1)  
 
+    # Adds each entity to the corresponding list in the data dictionary 
+    data['Newspaper'].append(split_file[0])
+    data['Year'].append(split_file[1])
+    data['Month'].append(split_file[2])
+    data['Day'].append(split_file[3])
+    data['Filename'].append(split_file[5])
+    data['Pages'].append(1) 
 
-def detect_faces(filepath, mtcnn, dictionary):
-    # Load an image containing faces
-    img = Image.open(filepath)
+def detect_faces(filepath, mtcnn, data):
 
-    # Detect faces in the image
+    # Loads the images
+    img = Image.open(filepath) ## Overvej at bruge cv2 her: img = cv2.imread(filepath, cv2.IMREAD_GRAYSCALE) 
+    
+    # Detects faces in the images
     boxes, _ = mtcnn.detect(img)
 
     img.close()
 
-    # If the model does not detect a face assign an empthy list to the variable boxes
+    # If the model does not detect a face assign an empthy list to boxes and append the number 0 to the face detected column 
     if boxes is None:
         boxes = []
-        dictionary['Pages with Faces'].append(0)
-    
+        data['Face Detected'].append(0) 
     else: 
-        dictionary['Pages with Faces'].append(1)
-        # Appends the length of the np.array containing the bounding boxes
-    dictionary['Detected Faces'].append(len(boxes))    
+        # If a face is detected append the number 1 to the face detected column 
+        data['Face Detected'].append(1) 
+        
+    # Appends the length of the np.array containing the bounding boxes to the faces column
+    data['Faces'].append(len(boxes))    
 
+def calculate_percentages(directory, directory_folderpath, df):
 
-def calculate_decade(directory, directory_folderpath):
-    
-    altered_df = pd.read_csv(os.path.join(directory_folderpath, f"{directory}_newspaper.csv")) 
+    # Groups the dataframe by decade and sums the content in the three columns
+    sorted_df = df.groupby('Decade')[['Faces', 'Face Detected', 'Pages']].sum()
 
-    year_to_decade = np.round(altered_df['Year']//10*10, decimals=0)
+    # Calculate the percentage of pages with faces for each decade and inserts this information in a new column
+    percentage = np.round(sorted_df['Face Detected']/sorted_df['Pages'], decimals=2)
+    sorted_df.insert(3, 'Pages with Faces (%)', percentage)
 
-    altered_df.insert(1, 'Decade', year_to_decade)
-
-    return altered_df
-
-
-def calculate_percentages(directory, directory_folderpath, altered_df):
-
-    sorted_df = altered_df.groupby('Decade')[['Detected Faces', 'Pages with Faces', 'Pages Total']].sum()
-
-    percentage = np.round(sorted_df['Pages with Faces']/sorted_df['Pages Total'], decimals=2)
-
-    sorted_df.insert(3, 'Percentage of Pages with Faces', percentage)
-
+    # Saves the sorted dataframe as a csv file 
     sorted_df.to_csv(os.path.join(directory_folderpath, f"{directory}_sorted_newspaper_information.csv"))
 
     return sorted_df
 
-
-def plot_results(sorted_df, directory, directory_folderpath):
-    plt.figure(figsize=(12, 8))
-    sorted_df['Percentage of Pages with Faces'].plot(kind='bar') 
-    plt.title('Percentage of Pages with Faces by Decade', weight='bold')  
-    plt.ylabel('Percentage of Pages with Faces', weight='bold')  
-    plt.xlabel('Decade', weight='bold')  
-    plt.xticks(rotation=0)  
-    plt.savefig(os.path.join(directory_folderpath, f"{directory}_distribution_across_decades.jpg")) 
-    plt.close()
-
-
 def main():
 
-    # Creates a filepath for each directory
+    # Creates a filepath for each directory and makes the out directory if does not exist
     in_folderpath = os.path.join("in")
     out_folderpath = os.path.join("out")
-   
-    # If the out directory does not exist, make the directory
     os.makedirs(out_folderpath, exist_ok=True)
 
+    # Calls the parser function
+    args = parser()
+
+    # Initializes the MTCNN model for face detection
     mtcnn = MTCNN(keep_all=True)
 
+    # Creates a sorted list of the content in the in folder 
     dirs = sorted(os.listdir(in_folderpath))
 
-    for directory in dirs:
-   
-        directory_folderpath = create_dataframe(in_folderpath, out_folderpath, directory, mtcnn)
+    # Iterates over each directory in the in folder
+    for index, directory in enumerate(dirs):
 
-        altered_df = calculate_decade(directory, directory_folderpath)
+        # Extracts the metadata and the faces detected and saves it in a dictionary   
+        data = extract_data(in_folderpath, directory, mtcnn)
 
-        sorted_df = calculate_percentages(directory, directory_folderpath, altered_df)
+        # Converts the data into a dataframe and adds a decade column to it
+        directory_folderpath, df = create_dataframe(out_folderpath, directory, data, args)
 
-        plot_results(sorted_df, directory, directory_folderpath)
+        # Calculates the percentages of pages with faces for each decade
+        sorted_df = calculate_percentages(directory, directory_folderpath, df)
+
+        # Plots the results for each directory
+        plot_results(sorted_df, directory, directory_folderpath, index)
 
 if __name__ == "__main__":
     main()
