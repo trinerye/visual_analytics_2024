@@ -8,8 +8,10 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
 def parser():
+
      # Creates an argparse object 
     parser = argparse.ArgumentParser()
+
     # Defines the CLI argument that specifies the filenames of the selected image (REQUIRED)
     parser.add_argument("--image",
                         "-i",
@@ -26,17 +28,21 @@ def parser():
     return parser.parse_args()  # Parses and returns the CLI arguments
 
 def create_histogram(filepath):  
+
     # Reads the image 
     image = cv2.imread(filepath)
+    
     # Creates a color histogram of that image
     hist = cv2.calcHist([image], [0,1,2], None, [256,256,256], [0,256, 0,256, 0,256])
+
     # Normalizes the color histogram
     norm_hist = cv2.normalize(hist, hist, 0, 1.0, cv2.NORM_MINMAX)
+    
     return norm_hist
 
 def compare_histograms(in_folderpath, chosen_norm_hist):
    
-    # Creates a sorted list of the content in the directory 
+   # Creates a sorted list of the content in the in folder 
     dirs = sorted(os.listdir(in_folderpath))
 
     filenames = []
@@ -44,14 +50,19 @@ def compare_histograms(in_folderpath, chosen_norm_hist):
 
     # Iterates over each file in the directory
     for file in tqdm(dirs):
+
         # Adds the name of the image to a list
         filenames.append(file)
+
         # Creates a filepath for each image 
         filepath = os.path.join(in_folderpath, file)
+
         # Calls the create_histogram function to create a color histogram of all the images in the directory
         norm_hist = create_histogram(filepath)
+
         # Compares the selected image with all the other images and calculate the distance between them
         comparison = round(cv2.compareHist(chosen_norm_hist, norm_hist, cv2.HISTCMP_CHISQR), 2)
+
         # Adds the result to a list
         distances.append(comparison)
 
@@ -74,18 +85,20 @@ def save_plot(sorted_df, in_folderpath, out_folderpath):
 
     # Iterates over each filename in sorted_df and creates a folderpath for each image
     sorted_filepath = [os.path.join(in_folderpath, filename) for filename in sorted_df['Filename']]
-
+    
     # Creates a figure with 6 subplots 
     fig, axarr = plt.subplots(1, 6, figsize=(20, 5))
 
     # Displays the selected image in the first subplot
     axarr[0].imshow(mpimg.imread(sorted_filepath[0]))
+    # Creates a title  displaying the filename and distance 
     axarr[0].set_title(f"$\\bf{{Selected\\ image}}$\n {sorted_df.iloc[0]['Filename']} \nDistance: {sorted_df.iloc[0]['Distance']}")
     axarr[0].axis('off')  
 
     # Iterates over the remaining 5 subplots, displaying the nearest neighbor images
     for i in range(1, 6):
         axarr[i].imshow(mpimg.imread(sorted_filepath[i]))
+        # Creates a title for each image displaying the filename and distance
         axarr[i].set_title(f"{sorted_df.iloc[i]['Filename']} \nDistance: {sorted_df.iloc[i]['Distance']:.4f}")
         axarr[i].axis('off') 
 
@@ -99,21 +112,21 @@ def main():
     # Calls the parser function
     args = parser()
 
-    # Creates the folderpaths
+    # Creates the folder paths
     in_folderpath = os.path.join("in", "flowers")
     out_folderpath = os.path.join("out", "cv2_images")
     os.makedirs(out_folderpath, exist_ok=True)
     
-    # Folderpath for the chosen image
+    # Filepath for the selected image
     chosen_image_path = os.path.join(in_folderpath, args.image)
 
-    # Passing the chosen_image_path as an argument to the create_histogram function
+    # Creates a histogram for the selected image.
     chosen_norm_hist = create_histogram(chosen_image_path)
 
-    # Calling the function which compares the chosen images with the entire image dataset
+    # Compares the selected image with the entire dataset
     filenames, distances = compare_histograms(in_folderpath, chosen_norm_hist)
 
-    # Calling the function which saves the images_names and results in a dataframe and turns it into a CSV
+    # Saves the results as a csv file
     sorted_df = save_csv(in_folderpath, out_folderpath, filenames, distances, args)
 
     # Creates and saves the plot if the --print flag is added when running the script

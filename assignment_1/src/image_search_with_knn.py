@@ -12,8 +12,10 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
 def parser():
+
     # Creates an argparse object 
     parser = argparse.ArgumentParser()
+
     # Defines the CLI argument that specifies the image index for the selected image (REQUIRED)
     parser.add_argument("--index",
                         "-i",
@@ -30,6 +32,8 @@ def parser():
     return parser.parse_args()  # Parses and returns the CLI arguments
 
 def load_model():
+    
+    # Initializing the VGG16 model
     return VGG16(weights='imagenet', include_top=False, pooling='avg', input_shape=(224, 224, 3))
 
 def extract_features(filepath, model):
@@ -103,18 +107,18 @@ def save_csv(distances, indices, filenames, out_folderpath):
 
     return index, files, dist
 
-def save_plot(filepath, args, index, files, dist, out_folderpath):
+def save_plot(filepaths, args, index, files, dist, out_folderpath):
     # Creates a figure with 6 subplots 
     fig, axarr = plt.subplots(1, 6, figsize=(20, 5))
 
     # Displays the selected image in the first subplot
-    axarr[0].imshow(mpimg.imread(filepath[index[0]]))
+    axarr[0].imshow(mpimg.imread(filepaths[index[0]]))
     axarr[0].set_title(f"$\\bf{{Selected\\ image}}$\n {files[0]} \nDistance: {dist[0]}")
     axarr[0].axis('off')  
 
     # Iterates over the remaining 5 subplots, displaying the nearest neighbor images
     for i in range(1,6):
-        axarr[i].imshow(mpimg.imread(filepath[index[i]]))
+        axarr[i].imshow(mpimg.imread(filepaths[index[i]]))
         axarr[i].set_title(f"{files[i]} \nDistance: {dist[i]:.4f}")
         axarr[i].axis('off') 
 
@@ -124,14 +128,14 @@ def save_plot(filepath, args, index, files, dist, out_folderpath):
     plt.close(fig)  
 
 def main():
-    # Creates folder paths
+    # Creates the folder paths
     in_folderpath = os.path.join("in", "flowers")
     out_folderpath = os.path.join("out", "knn_images")
     os.makedirs(out_folderpath, exist_ok=True)
 
     # Creates filenames and filepaths for each image
     filenames = [file for file in sorted(os.listdir(in_folderpath)) if file.endswith('jpg')]
-    filepath = [os.path.join(in_folderpath, file) for file in filenames]
+    filepaths = [os.path.join(in_folderpath, file) for file in filenames]
 
     # Calls the parser function
     args = parser()
@@ -140,7 +144,7 @@ def main():
     model = load_model()
 
     # Extracts features from all the images 
-    feature_list = extract_features(filepath, model)
+    feature_list = extract_features(filepaths, model)
 
     # Compares the extracted features and finds the nearest neighbors for the selected image
     distances, indices = compare_features(feature_list, args)
@@ -151,7 +155,7 @@ def main():
     # Creates and saves the plot if the --print flag is added when running the script
     if args.print:
         print(f"Saving plot in the 'out' folder")
-        save_plot(filepath, args, index, files, dist, out_folderpath)
+        save_plot(filepaths, args, index, files, dist, out_folderpath)
     else:
         # If not it prints a message to the screen explaining how to add the flag 
         print(f"Include the -print flag to create and save a plot showing the result")
