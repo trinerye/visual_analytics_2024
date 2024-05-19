@@ -88,7 +88,7 @@ def extract_metadata(file, data):
 def detect_faces(filepath, mtcnn, data):
 
     # Loads the images
-    img = Image.open(filepath) ## Overvej at bruge cv2 her: img = cv2.imread(filepath, cv2.IMREAD_GRAYSCALE) 
+    img = Image.open(filepath)  
     
     # Detects faces in the images
     boxes, _ = mtcnn.detect(img)
