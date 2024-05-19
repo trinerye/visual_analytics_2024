@@ -91,14 +91,12 @@ def save_plot(sorted_df, in_folderpath, out_folderpath):
 
     # Displays the selected image in the first subplot
     axarr[0].imshow(mpimg.imread(sorted_filepath[0]))
-    # Creates a title  displaying the filename and distance 
     axarr[0].set_title(f"$\\bf{{Selected\\ image}}$\n {sorted_df.iloc[0]['Filename']} \nDistance: {sorted_df.iloc[0]['Distance']}")
     axarr[0].axis('off')  
 
     # Iterates over the remaining 5 subplots, displaying the nearest neighbor images
     for i in range(1, 6):
         axarr[i].imshow(mpimg.imread(sorted_filepath[i]))
-        # Creates a title for each image displaying the filename and distance
         axarr[i].set_title(f"{sorted_df.iloc[i]['Filename']} \nDistance: {sorted_df.iloc[i]['Distance']:.4f}")
         axarr[i].axis('off') 
 
