@@ -1,4 +1,4 @@
-Decade,Detected Faces,Pages with Faces,Pages Total,Percentage of Pages with Faces
+Decade,Faces,Face Detected,Pages,Pages with Faces (%)
 1820,0,0,26,0.0
 1830,1,1,54,0.02
 1840,1,1,50,0.02
