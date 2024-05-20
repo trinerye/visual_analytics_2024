@@ -4,10 +4,8 @@ from tqdm import tqdm
 import pandas as pd
 import numpy as np
 from sklearn.neighbors import NearestNeighbors
-from tensorflow.keras.preprocessing.image import (load_img, 
-                                                  img_to_array)
-from tensorflow.keras.applications.vgg16 import (VGG16, 
-                                                 preprocess_input)
+from tensorflow.keras.preprocessing.image import load_img, img_to_array
+from tensorflow.keras.applications.vgg16 import VGG16, preprocess_input
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
@@ -41,7 +39,7 @@ def extract_features(filepath, model):
     feature_list = []
 
 # Iterates through the list of filepaths 
-    for i in tqdm(range(len(filepath))):
+    for i in tqdm(range(len(filepath)), desc="Processing images"):
         
         # Loads and reshapes the image data
         image = load_img(filepath[i], target_size=(224, 224))
@@ -159,7 +157,6 @@ def main():
     else:
         # If not it prints a message to the screen explaining how to add the flag 
         print(f"Include the -print flag to create and save a plot showing the result")
-
 
 if __name__ == "__main__":
     main()

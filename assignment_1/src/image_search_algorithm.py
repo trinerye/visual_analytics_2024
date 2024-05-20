@@ -9,7 +9,7 @@ import matplotlib.image as mpimg
 
 def parser():
 
-     # Creates an argparse object 
+    # Creates an argparse object 
     parser = argparse.ArgumentParser()
 
     # Defines the CLI argument that specifies the filenames of the selected image (REQUIRED)
@@ -49,7 +49,7 @@ def compare_histograms(in_folderpath, chosen_norm_hist):
     distances = []
 
     # Iterates over each file in the directory
-    for file in tqdm(dirs):
+    for file in tqdm(dirs, desc="Compares images"):
 
         # Adds the name of the image to a list
         filenames.append(file)
