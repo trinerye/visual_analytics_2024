@@ -27,7 +27,6 @@ bn = BatchNormalization()(flat1)
 drop = Dropout(0.1)(bn)
 class1 = Dense(128, activation='relu')(drop)
 output = Dense(10, activation='softmax')(class1)
-
 ```
 Afterwards, the model is compiled using the ``Adam`` optimizer with an ``ExponentialDecay()`` learning rate at ``0.001`` to fit the optimizer. The loss function is set to ``categorical_crossentropy`` with ``accuracy`` used as the evaluation metric.
 
@@ -97,13 +96,11 @@ deactivate
 
 Write about how to use the flags
 
-```
 |Flag     |Shorthand|Description                                               |Type|Required|
 |---------|---------|----------------------------------------------------------|----|--------|
 |--epochs |-e       |Takes one or more artists in dataset to filter by         |int |TRUE    |
 |--print  |-p       |Takes one query from which to explore the artists's corpus|str |FALSE   |
 
-```
 ## Discussion 
 
 ### Summary of the key points from the outputs 
