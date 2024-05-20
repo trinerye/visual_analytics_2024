@@ -1,7 +1,11 @@
+import os
 import matplotlib.pyplot as plt
 import numpy as np
 
-def plot_history(H, epochs, plot_path):
+def plot_history(H, epochs, out_folderpath):
+
+    plot_path = os.path.join(out_folderpath, "loss_curve.png")
+
     plt.figure(figsize=(12,6))
     plt.subplot(1,2,1)
     plt.plot(np.arange(0, epochs), H.history["loss"], label="train_loss")
@@ -21,3 +25,4 @@ def plot_history(H, epochs, plot_path):
     plt.tight_layout()
     plt.legend()
     plt.savefig(plot_path)
+

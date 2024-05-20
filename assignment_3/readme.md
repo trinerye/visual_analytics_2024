@@ -1,27 +1,76 @@
-# Assignment 3: Transfer learning w/ pretrained CNNs
+# Assignment 3: Transfer learning with pretrained CNNs
 
-## Description of the assignment
+## About
+
+This project uses transfer learning with the pre-trained ``VGG16`` model to classify images from the ``Tobacco3482`` dataset, comprising scanned black-and-white images across ten categories. Additionally, the ``ImageDataGenerator`` from ``tensorflow`` augments the data due to the small size of some categories in the Tobacco3482 dataset.
+
+Before the classification, however, the dataset is split into a train-and-test set using ``scikit-learn``, and the model gets modified by removing its existing classification layers and adding custom layers using tensorflow, compiling the layers, and adding labels for the different categories.  
+
+The src folder contains two scripts:
+**transfer_learning.py:** Trains the CNN and generates a classification report.
+**plotting_tools.py:** Plots the loss curve.
 
 
+### Data
 
-## Installation
+Download the Tobacco3482 dataset from Kaggle here
 
- 1. Open a terminal and clone the repository using Git 
+Write something about the extra folder and how to store it in the in folder
+
+### Model
+
+Explain the hyper parameters, the layers and how the model is compiled
+
+##  File Structure
+
+```
+└── assignment_3
+        |
+        ├── in
+        │   └── Tobacco3482 (contains 3482 files)
+        │      
+        ├── out
+        |   ├── classification_report.txt
+        |   └── loss_curve.png
+        |
+        ├── src
+        │   ├── plotting_tools.py
+        │   └── transfer_learning.py
+        │     
+        ├── .gitignore
+        ├── README.md
+        ├── requirements.txt
+        ├── run.sh
+        └── setup.sh
+```
+## Usage
+
+### Pre-Requisites
+
+Before you run the script, ensure you meet the following requirement:
+
+**Python**: version 3.12.3
+
+### Installation
+
+ Open a terminal and clone the repository using Git 
 ```sh
 git clone https://github.com/trinerye/visual_analytics_2024.git
 ```
 
-2. Change directory to the assignment folder 
+Change directory to the assignment folder 
 ```sh
 cd assignment_3
 ```
 
-3. Run the setup script to install the dependencies needed for this project. It simultaneously creates a virtual environment containing the specific versions used to develop this project. 
+### Commands
+
+Run the setup script to install the dependencies needed for this project. It simultaneously creates a virtual environment containing the specific versions used to develop this project. 
 ```sh
 bash setup.sh
 ```
 
-4. Activate the environment and run the main script. Be aware that it deactivates the environment again after running the  script.
+Activate the environment and run the main script. Be aware that it deactivates the environment again after running the  script.
 ```sh
 bash run.sh
 ```
@@ -34,6 +83,24 @@ python src/transfer_learning
 deactivate
 ```
 
-## Interpretation of the result 
+### Command Line Interface Arguments 
 
-insert image of plot
+Write about how to use the flags
+
+```
+|Flag     |Shorthand|Description                                               |Type|Required|
+|---------|---------|----------------------------------------------------------|----|--------|
+|--epochs |-e       |Takes one or more artists in dataset to filter by         |int |TRUE    |
+|--print  |-p       |Takes one query from which to explore the artists's corpus|str |FALSE   |
+
+```
+## Discussion 
+
+### Summary of the key points from the outputs 
+
+### Limitations
+
+### Future improvements 
+
+
+
