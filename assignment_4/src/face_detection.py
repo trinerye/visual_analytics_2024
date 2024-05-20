@@ -14,7 +14,7 @@ def parser():
      # Creates an argparse object 
     parser = argparse.ArgumentParser()
 
-    # Defines the CLI argument that creates and saves a plot of the results (OPTIONAL)                    
+    # Defines the CLI argument that creates and saves an unedited version of the csv (OPTIONAL)                    
     parser.add_argument("--print",
                         "-p",
                         action="store_true",
@@ -33,7 +33,7 @@ def extract_data(in_folderpath, directory, mtcnn):
     subdir = sorted(os.listdir(os.path.join(in_folderpath, directory))) 
 
     # Itereates over each file in the directory
-    for file in tqdm(subdir, desc="Processing image"):
+    for file in tqdm(subdir, desc="Processing images"):
 
         if file.endswith('jpg'):
 
