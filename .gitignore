@@ -3,6 +3,8 @@
 # Ignore everything in the 'in' directory
 in/*
 
+# But not the 'in' directory itself
+!in/
 
 
 
