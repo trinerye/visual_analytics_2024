@@ -98,10 +98,10 @@ deactivate
 
 Write about how to use the flags
 
-|Flag     |Shorthand|Description                                               |Type|Required|
-|---------|---------|----------------------------------------------------------|----|--------|
-|--epochs |-e       |Takes one or more artists in dataset to filter by         |int |TRUE    |
-|--print  |-p       |Takes one query from which to explore the artists's corpus|str |FALSE   |
+|Flag     |Shorthand|Description                 |Type|Required|
+|---------|---------|----------------------------|----|--------|
+|--epochs |-e       |Write something here        |int |TRUE    |
+|--print  |-p       |Write something here        |str |FALSE   |
 
 ## Discussion 
 
