@@ -4,10 +4,11 @@
 
 This project uses ``scikit-learn`` to classify images from the ``Cifar-10`` dataset which have been greyscaled, normalized, and reshaped to fit the requirements of the ``LogisticRegression()`` and ``MLPClassifier()`` classifiers. 
 
-There are two scripts in the ``src`` folder, one for training the logistic regression classifier and another for training the neural network classifier. Each script generates a detailed classification report stored in the ``out`` folder with an additional plot of the neural network classifier's loss curve illustrating its performance. Lastly, the trained models and the vectorizer are stored in the ``models`` folder to ensure reproducibility.
+There are two scripts in the ``src`` folder, one for training the logistic regression classifier and another for training the neural network classifier. Each script generates a detailed classification report stored in the ``out`` folder with an additional plot of the neural network classifier's loss curve illustrating its performance. Lastly, the trained models are stored in the ``models`` folder to ensure reproducibility.
 
 ### Data
 
+Hvad er det for et dataset 
 You do not need a data folder for this repository as the cifar-10 dataset can be downloaded from the ``tensorflow.keras.datasets`` as follows:
 
 ```sh
@@ -17,13 +18,7 @@ from tensorflow.keras.datasets import cifar10
 ```
 Read more about the cifar-10 dataset here
 
-### Model
-
-Describe the models here
-
-## Setup
-
-###  :file_folder: File Structure
+##  File Structure
 
 ```
 └── assignment_2
@@ -49,9 +44,21 @@ Describe the models here
         └── setup.sh
 ```
 
-###  :electric_plug: Installation
+## Usage
+
+Write something here
+
+### Pre-Requisites
+
+Before you run the script, ensure you meet the following requirement:
+
+**Python**: version 3.12.3
+
+
+###  Installation
 
  1. Open a terminal and clone the repository using Git 
+
 ```sh
 git clone https://github.com/trinerye/visual_analytics_2024.git
 ```
@@ -67,10 +74,6 @@ bash setup.sh
 ```
 
 Write something about how it creates and environment 
-
-### Pre-Requisites
-
-the requirements file
 
 ### Commands
 
@@ -89,20 +92,6 @@ python src/logistic_regression.py &
 python src/neural_network.py 
 # Deactivate the enviroment
 deactivate
-```
-
-## Usage
-
-Write about how to use the flags
-
-### Command Line Interface Arguments 
-
-```
-  -a, --AAA         Write a short description here
-  -b, --BBB         Write a short description here
-  -c, --CCC         Write a short description here
-  -h, --help        Show help [boolean]
-
 ```
 
 ## Resources

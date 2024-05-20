@@ -2,12 +2,13 @@ import os
 from sklearn import metrics
 from sklearn.datasets import fetch_openml
 from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import classification_report
 from sklearn.metrics import accuracy_score
 import joblib
 from joblib import dump
-from process_images import load_data, preprocess_images
+from preprocess_images import load_data, preprocess_images
 
-# This function trains the logistic regression model
+# This function initializes the logistic regression classifier and fits it to the training data
 def train_model(X_train_processed, y_train_processed):
     classifier = LogisticRegression(tol=0.1, solver='saga', multi_class='multinomial', random_state=42)
     classifier.fit(X_train_processed, y_train_processed)
@@ -30,38 +31,38 @@ def saving_report(classifier_metrics, classifier, report_path, classifier_path):
 def main():
 
     # Creates a filepath for each directory 
-    out_folderpath = os.path.join("out", "logistic_regression")
-    models_folderpath = os.path.join("models", "logistic_regression")
+    out_folderpath = os.path.join("out")
+    models_folderpath = os.path.join("models")
 
     # If the directory does not exist, make the directory
     os.makedirs(out_folderpath, exist_ok=True)
     os.makedirs(models_folderpath, exist_ok=True)
 
-    # Filepath for each saved file
-    classifier_path = os.path.join(models_folderpath, "regression_classifier.joblib")
-    report_path = os.path.join(out_folderpath, "classification_report.txt")
+    # Creates a filepath for each saved file
+    classifier_path = os.path.join(models_folderpath, "logistic_regression_classifier.joblib")
+    report_path = os.path.join(out_folderpath, "logistic_regression_classification_report.txt")
   
-    # Loading the data
+    # Loads the data
     print("Loading data")
     (X_train, y_train), (X_test, y_test) = load_data()
  
     # List of labels
-    unique_labels = ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"]
+    labels = ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"]
 
-    # Preprocessing the training and test images
+    # Preprocesses the training and test images and labels 
     print("Processing images and labels")
     X_train_processed, y_train_processed = preprocess_images(X_train, y_train) 
     X_test_processed, y_test_processed = preprocess_images(X_test, y_test) 
 
-    #Training the logistic regression classifier
+    # Trains the logistic regression classifier
     print("Training the logistic regression classifier")
     classifier = train_model(X_train_processed, y_train_processed)
 
-    # Creating the classification report
+    # Creates the classification report
     print("Evaluating the logistic regression classifier")
-    classifier_metrics = evaluate_model(y_test_processed, X_test_processed, classifier, unique_labels)
+    classifier_metrics = evaluate_model(y_test_processed, X_test_processed, classifier, labels)
 
-    # Saving the classification report and the logistic regression classifier model
+    # Saves the classification report and the logistic regression classifier model
     print("Saving the classifation report and the logistic regression classifier")
     saving_report(classifier_metrics, classifier, report_path, classifier_path)
 
