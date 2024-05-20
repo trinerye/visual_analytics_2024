@@ -7,6 +7,7 @@ This project uses transfer learning with the pre-trained ``VGG16`` model to clas
 Before the classification, however, the dataset is split into a train-and-test set using ``scikit-learn``, and the model gets modified by removing its existing classification layers and adding custom layers using tensorflow, compiling the layers, and adding labels for the different categories.  
 
 The src folder contains two scripts:
+
 **transfer_learning.py:** Trains the CNN and generates a classification report.
 **plotting_tools.py:** Plots the loss curve.
 
