@@ -13,13 +13,23 @@ The src folder contains two scripts:
 
 ### Data
 
-Download the Tobacco3482 dataset from Kaggle here
-
-Write something about the extra folder and how to store it in the in folder
+Download the ``Tobacco3482`` dataset from Kaggle here and save it in the ``in`` folder. Be aware that the downloaded folder from Kaggle contains a second Tobacco3482 folder within it, so be sure to remove that from the folder to prevent errors when running the code. 
 
 ### Model
 
-Explain the hyper parameters, the layers and how the model is compiled
+The VGG16 model is loaded without the top classification layers, marking the remaining layers as nontrainable while adding the following layers to enhance model performance. 
+
+```
+# New classification layers
+
+flat1 = Flatten()(model.layers[-1].output)
+bn = BatchNormalization()(flat1)
+drop = Dropout(0.1)(bn)
+class1 = Dense(128, activation='relu')(drop)
+output = Dense(10, activation='softmax')(class1)
+
+```
+Afterwards, the model is compiled using the ``Adam`` optimizer with an ``ExponentialDecay()`` learning rate at ``0.001`` to fit the optimizer. The loss function is set to ``categorical_crossentropy`` with ``accuracy`` used as the evaluation metric.
 
 ##  File Structure
 
@@ -47,13 +57,13 @@ Explain the hyper parameters, the layers and how the model is compiled
 
 ### Pre-Requisites
 
-Before you run the script, ensure you meet the following requirement:
+Please makes sure to install the following requirements before running the script.
 
 **Python**: version 3.12.3
 
 ### Installation
 
- Open a terminal and clone the repository using Git 
+ Open a terminal terminal and clone the repository using Git 
 ```sh
 git clone https://github.com/trinerye/visual_analytics_2024.git
 ```
@@ -83,7 +93,7 @@ python src/transfer_learning
 deactivate
 ```
 
-### Command Line Interface Arguments 
+### Command Line Interface  
 
 Write about how to use the flags
 
