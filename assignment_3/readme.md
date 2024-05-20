@@ -8,8 +8,9 @@ Before the classification, however, the dataset is split into a train-and-test s
 
 The src folder contains two scripts:
 
-**transfer_learning.py:** Trains the CNN and generates a classification report.
-**plotting_tools.py:** Plots the loss curve.
+-  **transfer_learning.py:** Trains the CNN and generates a classification report.
+
+- **plotting_tools.py:** Plots the loss curve.
 
 
 ### Data
