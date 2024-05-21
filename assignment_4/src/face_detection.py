@@ -123,7 +123,7 @@ def calculate_percentages(directory, directory_folderpath, df):
 def main():
 
     # Creates a filepath for each directory and makes the out directory if does not exist
-    in_folderpath = os.path.join("in")
+    in_folderpath = os.path.join("in", "newspapers")
     out_folderpath = os.path.join("out")
     os.makedirs(out_folderpath, exist_ok=True)
 
