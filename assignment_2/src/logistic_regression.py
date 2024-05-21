@@ -6,7 +6,7 @@ from sklearn.metrics import classification_report
 from sklearn.metrics import accuracy_score
 import joblib
 from joblib import dump
-from preprocess_images import load_data, preprocess_images
+from preprocessing_images import load_data, preprocess_images
 
 # This function initializes the logistic regression classifier and fits it to the training data
 def train_model(X_train_processed, y_train_processed):
