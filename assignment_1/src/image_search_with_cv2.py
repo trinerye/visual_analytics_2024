@@ -77,7 +77,7 @@ def save_csv(in_folderpath, out_folderpath, filenames, distances, args):
     sorted_df = df.sort_values(by=['Distance'], ascending=True).head(6)
 
     # Saves the sorted dataframe as a csv file in the out folder 
-    sorted_df.to_csv(os.path.join(out_folderpath, 'image_comparisons.csv'), index=False)
+    sorted_df.to_csv(os.path.join(out_folderpath, 'cv2_image_comparisons.csv'), index=False)
 
     return sorted_df
 
@@ -87,7 +87,7 @@ def save_plot(sorted_df, in_folderpath, out_folderpath):
     sorted_filepath = [os.path.join(in_folderpath, filename) for filename in sorted_df['Filename']]
     
     # Creates a figure with 6 subplots 
-    fig, axarr = plt.subplots(1, 6, figsize=(20, 5))
+    fig, axarr = plt.subplots(1, 6, figsize=(18, 5))
 
     # Displays the selected image in the first subplot
     axarr[0].imshow(mpimg.imread(sorted_filepath[0]))
@@ -101,7 +101,7 @@ def save_plot(sorted_df, in_folderpath, out_folderpath):
         axarr[i].axis('off') 
 
     # Saves the plot in the outfolder and closes the figure
-    plot_path = os.path.join(out_folderpath, 'image_comparison_plot.png')
+    plot_path = os.path.join(out_folderpath, 'cv2_image_comparison_plot.png')
     plt.savefig(plot_path)
     plt.close(fig)  
 

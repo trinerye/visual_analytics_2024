@@ -101,13 +101,13 @@ def save_csv(distances, indices, filenames, out_folderpath):
     df = pd.DataFrame(dictionary)
     
     # Saves the dataframe as a csv in the out folder
-    df.to_csv(os.path.join(out_folderpath, 'image_comparisons.csv'), index = False)
+    df.to_csv(os.path.join(out_folderpath, 'knn_image_comparisons.csv'), index = False)
 
     return index, files, dist
 
 def save_plot(filepaths, args, index, files, dist, out_folderpath):
     # Creates a figure with 6 subplots 
-    fig, axarr = plt.subplots(1, 6, figsize=(20, 5))
+    fig, axarr = plt.subplots(1, 6, figsize=(18, 5))
 
     # Displays the selected image in the first subplot
     axarr[0].imshow(mpimg.imread(filepaths[index[0]]))
@@ -121,7 +121,7 @@ def save_plot(filepaths, args, index, files, dist, out_folderpath):
         axarr[i].axis('off') 
 
     # Saves the plot in the outfolder and closes the figure
-    plot_path = os.path.join(out_folderpath, 'image_comparison_plot.png')
+    plot_path = os.path.join(out_folderpath, 'knn_image_comparison_plot.png')
     plt.savefig(plot_path)
     plt.close(fig)  
 
