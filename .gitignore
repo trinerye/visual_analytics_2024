@@ -1,7 +1,9 @@
 *_env
 
 #Ignore everything in the 'in' directory
-in/*
+**/in/*
+
+!**in/.gitkeep
 
 
 
