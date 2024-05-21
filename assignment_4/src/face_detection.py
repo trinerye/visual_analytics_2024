@@ -5,7 +5,7 @@ import argparse
 from tqdm import tqdm
 from facenet_pytorch import MTCNN
 from PIL import Image, ImageFile
-from plot_function import plot_results
+from plotting_tools import plot_results
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
