@@ -19,6 +19,16 @@ Download the [Tobacco3482](https://www.kaggle.com/datasets/patrickaudriaz/tobacc
 
 ### Model
 
+
+*The VGG16 model architecture without the classification layers*
+
+| Parameter      | Value        | Type |
+|----------------|--------------|------|
+| include_top    | False        | bool |
+| pooling        | avg          | str  |
+| input_shape    | (224, 224, 3)| int  |        
+
+
 For this project, the [VGG16](https://keras.io/api/applications/vgg/) model is loaded without the top classification layers, marking the remaining layers as nontrainable while adding the following layers to enhance its performance and prevent overfitting.
 
 |Layer (type)       |Output Shape|Number of Parameters|
