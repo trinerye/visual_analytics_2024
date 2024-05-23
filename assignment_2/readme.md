@@ -40,6 +40,8 @@ This project was built using the [LogisticRegression](https://scikit-learn.org/s
 | early_stopping | True       | bool |
 | verbose        | 1          | int  |
 
+<br>
+
 >**Neural Network Classifier**
 
 | Parameter          | Value   | Type |
@@ -135,6 +137,8 @@ Examining the classification reports in the output directory reveals that the te
 |Metrics         |Precision   |Recall|F1-Score|
 |----------------|------------|------|--------|
 |weighted average|0.31        |0.31  |0.31    |
+
+<br>
 
 >**Neural Network Classifier**
 
