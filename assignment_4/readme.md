@@ -2,27 +2,32 @@
 
 ## About
 
-This project uses transfer learning with the pre-trained ``VGG16`` model to classify images from the ``Tobacco3482`` dataset, comprising scanned black-and-white images across ten categories. Additionally, the ``ImageDataGenerator`` from ``tensorflow`` augments the data due to the small size of some categories in the Tobacco3482 dataset.
+This project uses transfer learning with the pre-trained ``VGG16`` model to classify images from the ``Tobacco3482`` dataset, comprising scanned black-and-white images across ten classes. Additionally, the ``ImageDataGenerator`` from ``tensorflow`` augments the data due to the small size of some classes in the Tobacco3482 dataset.
 
-Before the classification, however, the dataset is split into a train-and-test set using ``scikit-learn``, and the model gets modified by removing its existing classification layers and adding custom layers using tensorflow, compiling the layers, and adding labels for the different categories.  
+However, before classification, the dataset is split into a train-and-test set using ``scikit-learn``, and the model is modified by removing its existing classification layers and adding custom layers using tensorflow, compiling the layers, and adding labels for the different categories. 
 
 The ``src`` directory contains two scripts:
 
-- **face_detection.py:** 
+-  **transfer_learning.py:** Trains the CNN and generates a classification report.
 
-- **plotting_tools.py:** Plots the results 
+- **plotting_tools.py:** Plots the loss curve.
 
 
 ### Data
 
-Download the ``Tobacco3482`` dataset from Kaggle here and save it in the ``in`` directory. Be aware that the download from Kaggle contains a second Tobacco3482 directory within it, so be sure to remove that to prevent errors when running the code. 
+Download the historical Swiss newspapers used for this project [here](https://zenodo.org/records/3706863). You also need to download the images.zip file, which contains the three image datasets: the Journal de Genève (JDG, 1826-1994), the Gazette de Lausanne (GDL, 1804-1991), and the Impartial (IMP, 1881-2017). Once downloaded, copy the GDL, IMP, and JDG folders and place them in the ``in`` directory. 
+
 
 ### Model
 
-For this project, the VGG16 model is loaded without the top classification layers, marking the remaining layers as nontrainable while adding the following layers to enhance model performance. 
+This project was built using [MTCNN](https://medium.com/@danushidk507/facenet-pytorch-pretrained-pytorch-face-detection-mtcnn-and-facial-recognition-b20af8771144), a Multi-task Cascaded Convolutional Network, from facenet_pytorch, which consists of the following networks: 
+>- A **Proposal Network (P-Net)** that detects *"candidate face regions in an image"* (DhanushKumar, 2023).
 
+>- An **Output Network (O-Net)** that *"refines the candidate regions by locating facial landmarks such as the eyes, nose, and mouth"* (DhanushKumar, 2023)
 
-Afterwards, the model is compiled using the ``Adam`` optimizer with an ``ExponentialDecay()`` learning rate at ``0.001`` to fit the optimizer. The loss function is set to ``categorical_crossentropy`` with ``accuracy`` used as the evaluation metric.
+>- A **Refine Network (R-Net)** that *"aligns the detected faces based on the positions of the facial landmarks"* (DhanushKumar, 2023)
+
+We use the model to produce the bounding boxes, although the vectors are not used directly in the assignment. Instead, we count the frequency of bounding boxes, using them to indicate whether the image contains a face and how many. 
 
 ##  File Structure
 
@@ -31,13 +36,25 @@ Afterwards, the model is compiled using the ``Adam`` optimizer with an ``Exponen
         |
         ├── in
         │   └── newspapers
-        |         ├── GDL
-        |         ├── IMP      
-        |         └── JDG  
+        |         ├── GDL (contains ... images)
+        |         ├── IMP (contains ... images)     
+        |         └── JDG (contains ... images)
         |
         ├── out
-        |   ├── classification_report.txt
-        |   └── loss_curve.png
+        |   ├── GDL 
+        |   |    ├── GDL_distribution_across_decades.jpg
+        |   |    ├── GDL_newspaper.csv
+        |   |    └── GDL_sorted_newspaper_information.csv
+        |   |
+        |   ├── IMP
+        |   |   ├── IMP_distribution_across_decades.jpg
+        |   |   ├── IMP_newspaper.csv
+        |   |   └── IMP_sorted_newspaper_information.csv
+        |   |
+        |   └── JDG
+        |       ├── JDG_distribution_across_decades.jpg
+        |       ├── JDG_newspaper.csv
+        |       └── JDG_sorted_newspaper_information.csv
         |
         ├── src
         │   ├── face_detection.py
@@ -94,27 +111,24 @@ deactivate
 
 This project supports several command-line flags to customize the training process. *See table for reference.*
 
-|Flag      |Shorthand|Description                                |Type|Required|
-|----------|---------|-------------------------------------------|----|--------|
-| --print  | -p      |Saves the model summary in the outfolder   |str |FALSE   |
+|Flag      |Shorthand|Description                                                      |Type |Required|
+|----------|---------|-----------------------------------------------------------------|-----|--------|
+| --print  | -p      |Saves an unedidted version of the csv file in the out directory  |bool |FALSE   |
 
 ## Results 
 
 Write something here
 
-### Loss curve
+
 
 ![plot](out/loss_curve.png)
 
 Describe what you see
 
-### Limitations
+### Limitations and future improvements 
+Rescale the images, dog skal man være opmærksom på at det kan gøre det endnu svære for modellen at genkende ansigter
 
-Noget med at modellen er trænet på color images og derfor måske har svært ved at classify greyscaled images
+## References
 
-### Future improvements 
-
-Grid search
-
-
+DhanushKumar, (2023, September 9), Facenet-pytorch | Pretrained Pytorch face detection (MTCNN) and facial recognition…, Medium, https://medium.com/@danushidk507/facenet-pytorch-pretrained-pytorch-face-detection-mtcnn-and-facial-recognition-b20af8771144 
 
