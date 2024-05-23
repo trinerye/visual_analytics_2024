@@ -111,23 +111,21 @@ In the ``out`` directory, you can find a plot of the loss and accuracy curve ill
 
 ![plot](out/loss_curve.png)
 
-In the first plot, both the training and the validation loss curves decrease, which tells us that the model is learning well and adjusting its weights to correct for errors and improve its overall performance. However, in the second plot, the training and validation accuracy curves increase, which indicates that the model becomes more accurate in its predictions as the epochs progress. 
+In the first plot, **the training and validation loss curves decrease**, which tells us that the model is learning and adjusting its weights accordingly to correct errors and enhance overall performance. However, in the second plot, **the training and validation accuracy curves increase**, which indicates that the model becomes more accurate in its predictions as the epochs progress. Furthermore, the short distance between the training and the validation curve indicates that the model generalizes the validation data well without overfitting the training data. **In conclusion, while loss decreases, accuracy increases, suggesting that the model is effectively learning the patterns in the data.** 
 
-While loss decreases, accuracy increases, which suggests that the model is effectively learning the patterns in the data. Also, the short distance between the training and the validation curve indicates that the model generalizes the validation data well without overfitting the training data.
-
-*Something about the classification report*
+When examining the classification report in the ``out`` directory, we see that the test data is unbalanced, with some classes being larger than others. In such instances, the weighted average might be the preferred metric as it accounts for this difference in the dataset, giving “more importance to the classes that have more data” (Prasanna, 2024).
 
 |Metrics         |Precision   |Recall|F1-Score|
-|----------------|------------|------|-----|
-|weighted average|0.74        |0.73  |0.73 |
+|----------------|------------|------|--------|
+|weighted average|0.74        |0.73  |0.73    |
 
-*Why choose to look at the weighted avg?*
-
-
+Nevertheless, the model performs well on the test data with a weighted F1-score of 0.73, suggesting that the model is significantly accurate at predicting the correct image labels.
 
 ### Limitations and future improvements 
 
-Complex model architecture, exstensive finetuning --> Grid search
+- In the future, to reduce the impact that some classes have compared to others, the data should be split so that the original class proportions of the Tobacco3482 dataset are preserved, thus ensuring that the distribution in the subsets remains true to the original content.
+
+- Since the VGG16 model has a complex architecture that requires extensive fine-tuning to enhance its performance, conducting a grid search using the ``GridSearchCV`` function from scikit-learn could possibly reduce the time spent fine-tuning the model.
 
 
 
