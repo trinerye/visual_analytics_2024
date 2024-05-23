@@ -111,7 +111,7 @@ In the ``out`` directory, you can find a plot of the loss and accuracy curve ill
 
 ![plot](out/loss_curve.png)
 
-In the first plot, **the training and validation loss curves decrease**, which tells us that the model is learning and adjusting its weights accordingly to correct errors and enhance overall performance. However, in the second plot, **the training and validation accuracy curves increase**, which indicates that the model becomes more accurate in its predictions as the epochs progress. Furthermore, the short distance between the training and the validation curve indicates that the model generalizes the validation data well without overfitting the training data. **In conclusion, while loss decreases, accuracy increases, suggesting that the model is effectively learning the patterns in the data.** 
+In the first plot, **the training and validation loss curves decrease**, which tells us that the model is learning and adjusting its weights accordingly to correct errors and enhance overall performance. However, in the second plot, **the training and validation accuracy curves increase**, which indicates that the model becomes more accurate in its predictions as the epochs progress. Furthermore, the short distance between the training and the validation curve indicates that the model generalizes the validation data well without overfitting the training data (Muralidhar, 2023). **In conclusion, while loss decreases, accuracy increases, suggesting that the model is effectively learning the patterns in the data.** 
 
 When examining the classification report in the ``out`` directory, we see that the test data is unbalanced, with some classes being larger than others. In such instances, the weighted average might be the preferred metric as it accounts for this difference in the dataset, giving “more importance to the classes that have more data” (Prasanna, 2024).
 
@@ -128,6 +128,8 @@ Nevertheless, the model performs well on the test data with a weighted F1-score 
 - Since the VGG16 model has a complex architecture that requires extensive fine-tuning to enhance its performance, conducting a grid search using the ``GridSearchCV`` function from scikit-learn could possibly reduce the time spent fine-tuning the model.
 
 ## Reference
+
+Muralidhar, K. S. V. (2023, July 7). Learning Curve to identify Overfitting and Underfitting in Machine Learning. Medium. https://towardsdatascience.com/learning-curve-to-identify-overfitting-underfitting-problems-133177f38df5
 
 Prasanna, C. (2024, April 21). Classification Report Explained—Precision, Recall, Accuracy, Macro average, and Weighted Average. Medium. https://medium.com/@chanakapinfo/classification-report-explained-precision-recall-accuracy-macro-average-and-weighted-average-8cd358ee2f8a
 
