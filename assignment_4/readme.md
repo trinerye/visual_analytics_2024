@@ -121,9 +121,9 @@ This project supports several command-line flags to customize the training proce
 Write something here
 
 <div style="display: flex; justify-content: space-around;">
-    <img src="out/GDL/GDL_distribution_across_decades.jpg" alt="GDL" style="width: 30%;"/>
-    <img src="out/IMP/IMP_distribution_across_decades.jpg" alt="IMP" style="width: 30%;"/>
-    <img src="out/JDG/JDG_distribution_across_decades.jpg" alt="JDG" style="width: 30%;"/>
+    <img src="out/GDL/GDL_distribution_across_decades.jpg" alt="GDL" style="width: 32%;"/>
+    <img src="out/IMP/IMP_distribution_across_decades.jpg" alt="IMP" style="width: 32%;"/>
+    <img src="out/JDG/JDG_distribution_across_decades.jpg" alt="JDG" style="width: 32%;"/>
 </div>
 
 Describe what you see
