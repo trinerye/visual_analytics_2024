@@ -19,17 +19,16 @@ Download the [Tobacco3482](https://www.kaggle.com/datasets/patrickaudriaz/tobacc
 
 ### Model
 
-For this project, the [VGG16](https://keras.io/api/applications/vgg/) model is loaded without the top classification layers, marking the remaining layers as nontrainable while adding the following layers to enhance model performance. 
+For this project, the [VGG16](https://keras.io/api/applications/vgg/) model is loaded without the top classification layers, marking the remaining layers as nontrainable while adding the following layers to enhance its performance and prevent overfitting.
 
-```sh
-# New classification layers
+|Layer (type)       |Output Shape|Number of Parameters|
+|-------------------|------------|--------------------|
+|flatten            |(None, 512) |0                   |
+|batch_normalization|(None, 512) |2048                |
+|dense (relu)       |(None, 128) |65664               |
+|dropout            |(None, 128) |0                   |
+|dense_1 (softmax)  |(None, 10)  |1290                |
 
-flat1 = Flatten()(model.layers[-1].output)
-bn = BatchNormalization()(flat1)
-drop = Dropout(0.1)(bn)
-class1 = Dense(128, activation='relu')(drop)
-output = Dense(10, activation='softmax')(class1)
-```
 Afterwards, the model is compiled using the ``Adam`` optimizer with an ``ExponentialDecay()`` learning rate that fits the optimizer. The loss function is set to ``categorical_crossentropy`` with ``accuracy`` used as the evaluation metric.
 
 ##  File Structure
@@ -63,6 +62,8 @@ If you want replicate this project, follow the steps outlined below. The instruc
 
 **Python**: version 3.12.3
 
+*Something about pipreqs*
+
 ### Installation
 
 **1.** Clone the repository using Git.
@@ -89,7 +90,7 @@ bash run.sh
 source ./A3_env/bin/activate
 
 # Run the code
-python src/transfer_learning
+python src/transfer_learning -e 20 -p
 
 # Deactivate the enviroment
 deactivate
@@ -99,24 +100,34 @@ deactivate
 
 This project supports several command-line flags which customizes the training process. *See table for reference.*
 
-|Flag      |Shorthand|Description                                |Type|Required|
-|----------|---------|-------------------------------------------|----|--------|
-| --epochs | -e      |Number of epochs you want the model to run |int |TRUE    |
-| --print  | -p      |Saves the model summary in the outfolder   |str |FALSE   |
+|Flag      |Shorthand|Description                                 |Type|Required|
+|----------|---------|--------------------------------------------|----|--------|
+| --epochs | -e      |Number of epochs you want the model to run  |int |TRUE    |
+| --print  | -p      |Saves the model summary in the out directory|bool|FALSE   |
 
 ## Results 
 
-Write something here
-
-### Loss curve
+In the ``out`` directory, you can find a plot of the loss and accuracy curve illustrating the model's performance on the training and validation data, together with a classification report showing how accurate the model is at predicting which of the ten classes the test data belongs to. 
 
 ![plot](out/loss_curve.png)
 
-Describe what you see
+In the first plot, both the training and the validation loss curves decrease, which tells us that the model is learning well and adjusting its weights to correct for errors and improve its overall performance. However, in the second plot, the training and validation accuracy curves increase, which indicates that the model becomes more accurate in its predictions as the epochs progress. 
+
+While loss decreases, accuracy increases, which suggests that the model is effectively learning the patterns in the data. Also, the short distance between the training and the validation curve indicates that the model generalizes the validation data well without overfitting the training data.
+
+*Something about the classification report*
+
+|Metrics         |Precision   |Recall|F1-Score|
+|----------------|------------|------|-----|
+|weighted average|0.74        |0.73  |0.73 |
+
+*Why choose to look at the weighted avg?*
+
+
 
 ### Limitations and future improvements 
 
-Complex model architecture, exstensive fintuning --> Grid search
+Complex model architecture, exstensive finetuning --> Grid search
 
 
 
