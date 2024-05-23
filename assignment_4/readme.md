@@ -8,9 +8,9 @@ However, before classification, the dataset is split into a train-and-test set u
 
 The ``src`` directory contains two scripts:
 
--  **transfer_learning.py:** Trains the CNN and generates a classification report.
+-  **face_detection.py:** 
 
-- **plotting_tools.py:** Plots the loss curve.
+- **plotting_tools.py:** 
 
 
 ### Data
@@ -21,6 +21,7 @@ Download the historical Swiss newspapers used for this project [here](https://ze
 ### Model
 
 This project was built using [MTCNN](https://medium.com/@danushidk507/facenet-pytorch-pretrained-pytorch-face-detection-mtcnn-and-facial-recognition-b20af8771144), a Multi-task Cascaded Convolutional Network, from facenet_pytorch, which consists of the following networks: 
+
 >- A **Proposal Network (P-Net)** that detects *"candidate face regions in an image"* (DhanushKumar, 2023).
 
 >- An **Output Network (O-Net)** that *"refines the candidate regions by locating facial landmarks such as the eyes, nose, and mouth"* (DhanushKumar, 2023)
@@ -87,7 +88,7 @@ git clone https://github.com/trinerye/visual_analytics_2024.git
 cd assignment_4
 ```
 
-**3.** Run ``setup.sh`` to install the dependencies needed for this project. 
+**3.** Run ``setup.sh`` to create an environment and install the dependencies needed for this project. 
 ```sh
 bash setup.sh
 ```
@@ -119,9 +120,11 @@ This project supports several command-line flags to customize the training proce
 
 Write something here
 
-
-
-![plot](out/loss_curve.png)
+<div style="display: flex; justify-content: space-around;">
+    <img src="out/GDL/GDL_distribution_across_decades.jpg" alt="GDL" style="width: 33%;"/>
+    <img src="out/IMP/IMP_distribution_across_decades.jpg" alt="IMP" style="width: 33%;"/>
+    <img src="out/JDG/JDG_distribution_across_decades.jpg" alt="JDG" style="width: 33%;"/>
+</div>
 
 Describe what you see
 
