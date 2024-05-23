@@ -127,5 +127,9 @@ Nevertheless, the model performs well on the test data with a weighted F1-score 
 
 - Since the VGG16 model has a complex architecture that requires extensive fine-tuning to enhance its performance, conducting a grid search using the ``GridSearchCV`` function from scikit-learn could possibly reduce the time spent fine-tuning the model.
 
+## Reference
+
+Prasanna, C. (2024, April 21). Classification Report Explained—Precision, Recall, Accuracy, Macro average, and Weighted Average. Medium. https://medium.com/@chanakapinfo/classification-report-explained-precision-recall-accuracy-macro-average-and-weighted-average-8cd358ee2f8a
+
 
 
