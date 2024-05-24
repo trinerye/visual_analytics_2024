@@ -4,7 +4,7 @@
 
 This project uses ``scikit-learn`` to classify images from the ``Cifar-10`` dataset which have been greyscaled, normalized, and reshaped to fit the requirements of the ``LogisticRegression()`` and ``MLPClassifier()`` classifiers. 
 
-The ``src`` directory contains two scripts:
+The ``src`` directory contains three scripts:
 
 -  **logistic_regression.py:** Trains the logistic regression classifier and saves a classification report in the ``out`` directory
 
@@ -16,7 +16,7 @@ Additionally, the trained models are stored in the ``models`` directory to ensur
 
 ### Data
 
-The cifar-10 dataset consits of 60000 32x32 colour images divided into 10 categories. You can see more information about the cifar-10 dataset [here](https://www.cs.toronto.edu/~kriz/cifar.html)
+The cifar-10 dataset consits of 60000 32x32 color images divided into 10 categories. You can see more information about the cifar-10 dataset [here](https://www.cs.toronto.edu/~kriz/cifar.html)
 
 You do not need a data folder for this repository as the cifar-10 dataset can be downloaded from the ``tensorflow.keras.datasets`` as follows:
 
@@ -55,7 +55,7 @@ This project was built using the [LogisticRegression](https://scikit-learn.org/s
 | early_stopping     | True    | bool |
 | verbose            | 1       | int  |
 
-Both classifiers utilize ``early_stopping``, which terminates the training process if the validation score did not improve more than tol=0.000100 for 10 consecutive epochs, ensuring that the models do not overfit the training data and reducing the run time. 
+Both classifiers utilize ``early_stopping, ``which terminates the training process if the validation score does not improve more than tol=0.000100 for ten consecutive epochs. This ensures that the models do not overfit the training data and reduces the run time. 
 
 ##  File Structure
 
@@ -69,7 +69,7 @@ Both classifiers utilize ``early_stopping``, which terminates the training proce
         ├── out
         │   ├── logistic_regression_classification_report.txt
         |   ├── neural_network_classification_report.txt
-        |   └── loss_curve.png
+        |   └── neural_network_loss_curve.png
         |
         ├── src
         │   ├── logistic_regression.py
@@ -146,16 +146,16 @@ Examining the classification reports in the output directory reveals that the te
 |----------------|------------|------|--------|
 |weighted average|0.44        |0.43  |0.43    |
 
-An explanation for this might be that models using logistic regression tend to perform better on simple data or smaller datasets, such as binary classification problems like spam detection (Holt-Nguyen, 2023). In contrast, the neural network excels at multi-class classification, which likely explains its higher performance. However, a downside to neural networks is the need for a large dataset to train the model effectively, which makes the training process computationally heavy.
+An explanation for this could be that logistic regression models tend to perform better on simple data or smaller datasets, such as binary classification problems like spam detection (Holt-Nguyen, 2023). In contrast, neural networks excel at multi-class classification, which likely explains the high performance of the neural network classifier. However, a downside to neural networks is the need for a large dataset to train the model effectively, which makes the training process computationally heavy.
 
-Nevertheless, neither one performs exceptionally well, with a weighted F1-Score of 0.31 for the logistic regression classifier and 0.43 for the neural network classifier, which suggests that these models are not well suited for working with this type of image data. An explanation could be that the image data must be converted into a one-dimensional vector to fit the models, resulting in a loss of information since colour images, like the cifar-10 dataset, have three colour channels. 
+Nevertheless, none of the models performs exceptionally well, with a weighted F1-Score of 0.31 for the logistic regression classifier and 0.43 for the neural network classifier, which suggests that these models are not well suited for working with this type of image data. Since the images are converted into a one-dimensional vector to fit the models, this may cause a loss of information, as color images, like the cifar-10 dataset, have three color channels. Ultimately, substantial information loss will likely influence the results. 
 
 ![plot](out/neural_network_loss_curve.png)
 
 Looking at the loss curve belonging to the neural network classifier, one immediately notices that the validation loss curve is missing, as scikit-learn does not have a validation subset like tensorflow. As such, we cannot guarantee that the model is not overfitting on the data. **However, we can say that the model is learning from the training data as the loss curve decreases when the epochs progress.**
 
 ### Limitations and future improvements 
-- Another model architecture, such as a convolutional neural network (CNN), might be more suitable for such classification tasks. For instance, the VGG16 model from ``tensorflow.keras.applications`` takes a multi-dimensional tensor as an input, thus eliminating the need to flatten the image data into a grayscale colour space.
+- Another model architecture, such as a convolutional neural network (CNN), might be more suitable for such classification tasks. For instance, the VGG16 model from ``tensorflow.keras.applications`` takes a multi-dimensional tensor as an input, thus eliminating the need to flatten the image data into a grayscale color space.
 
 - Another way to enhance the performance could be to conduct a grid search using the ``GridSearchCV`` function from scikit-learn, which finds the optimal parameters for training each model. 
 

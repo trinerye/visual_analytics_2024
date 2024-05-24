@@ -13,7 +13,7 @@ def preprocess_images(images, labels):
 
     image_list = []  
     
-    # Iterates over each image in images (X_train and X_test)
+    # Iterates over each image in images 
     for image in tqdm(images, desc="Preprocessing image"):
 
         # Converts the images into greyscale
