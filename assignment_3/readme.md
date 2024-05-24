@@ -72,8 +72,6 @@ If you want replicate this project, follow the steps outlined below. The instruc
 
 **Python**: version 3.12.3
 
-*Something about pipreqs*
-
 ### Installation
 
 **1.** Clone the repository using Git.
@@ -86,7 +84,7 @@ git clone https://github.com/trinerye/visual_analytics_2024.git
 cd assignment_3
 ```
 
-**3.** Run ``setup.sh`` to install the dependencies needed for this project. 
+**3.** Run ``setup.sh`` to create an environment and install the dependencies needed for this project. 
 ```sh
 bash setup.sh
 ```
