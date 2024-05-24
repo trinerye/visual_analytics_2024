@@ -1,11 +1,6 @@
-facenet-pytorch
-matplotlib
-numpy
-pandas
-Pillow
-tqdm
-
-
-
-
-
+facenet-pytorch==2.6.0
+matplotlib==3.9.0
+numpy==1.26.4
+pandas==2.2.2
+pillow==10.2.0
+tqdm==4.66.4

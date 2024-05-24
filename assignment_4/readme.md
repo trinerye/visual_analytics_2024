@@ -2,21 +2,18 @@
 
 ## About
 
-This project uses transfer learning with the pre-trained ``VGG16`` model to classify images from the ``Tobacco3482`` dataset, comprising scanned black-and-white images across ten classes. Additionally, the ``ImageDataGenerator`` from ``tensorflow`` augments the data due to the small size of some classes in the Tobacco3482 dataset.
-
-However, before classification, the dataset is split into a train-and-test set using ``scikit-learn``, and the model is modified by removing its existing classification layers and adding custom layers using tensorflow, compiling the layers, and adding labels for the different categories. 
+This project uses the ``MTCNN`` from ``facenet_pytorch`` to detect faces in old Swiss newspapers, specifically the *Journal de Genève* (JDG, 1826-1994), the *Gazette de Lausanne* (GDL, 1804-1991), and *the Impartial* (IMP, 1881-2017). The objective is to [look for changing patterns in print media](https://github.com/CDS-AU-DK/cds-visual/tree/main/assignments/assignment4), as these likely change over time due to technological advancements.
 
 The ``src`` directory contains two scripts:
 
--  **face_detection.py:** 
+-  **face_detection.py:** Uses the MTCNN to detect faces in images, returning the bounding boxes surrounding them and calculating both the frequency of boxes and the percentage of pages with faces per decade. 
 
-- **plotting_tools.py:** 
+- **plotting_tools.py:** Plots the results as a barplot, showing the percentage of pages with faces per decade.
 
 
 ### Data
 
-Download the historical Swiss newspapers used for this project [here](https://zenodo.org/records/3706863). You also need to download the images.zip file, which contains the three image datasets: the Journal de Genève (JDG, 1826-1994), the Gazette de Lausanne (GDL, 1804-1991), and the Impartial (IMP, 1881-2017). Once downloaded, copy the GDL, IMP, and JDG folders and place them in the ``in`` directory. 
-
+Download the historical Swiss newspapers used for this project [here](https://zenodo.org/records/3706863). You need to download the images.zip file, rename the ``images`` folder to ``newspapers`` and save it in the ``in`` directory. 
 
 ### Model
 
@@ -28,7 +25,7 @@ This project was built using [MTCNN](https://medium.com/@danushidk507/facenet-py
 
 - A **Refine Network (R-Net)** that *"aligns the detected faces based on the positions of the facial landmarks"* (DhanushKumar, 2023)
 
-We use the model to produce the bounding boxes, although the vectors are not used directly in the assignment. Instead, we count the frequency of bounding boxes, using them to indicate whether the image contains a face and how many. 
+Although the vector values are not used directly in the assignment, we use the model to produce the bounding boxes and count their frequency. We use this information to determine  whether the image contains a face and how many.
 
 ##  File Structure
 
@@ -37,15 +34,15 @@ We use the model to produce the bounding boxes, although the vectors are not use
         |
         ├── in
         │   └── newspapers
-        |         ├── GDL (contains ... images)
-        |         ├── IMP (contains ... images)     
-        |         └── JDG (contains ... images)
+        |       ├── GDL
+        |       ├── IMP 
+        |       └── JDG 
         |
         ├── out
         |   ├── GDL 
-        |   |    ├── GDL_distribution_across_decades.jpg
-        |   |    ├── GDL_newspaper.csv
-        |   |    └── GDL_sorted_newspaper_information.csv
+        |   |   ├── GDL_distribution_across_decades.jpg
+        |   |   ├── GDL_newspaper.csv
+        |   |   └── GDL_sorted_newspaper_information.csv
         |   |
         |   ├── IMP
         |   |   ├── IMP_distribution_across_decades.jpg
@@ -72,7 +69,7 @@ To run this project, follow the steps outlined below. These instructions will gu
 
 ### Pre-Requisites
 
-*Please makes sure to install the following requirements before running the script.*
+*Please make sure to install the following requirements before running the script.*
 
 **Python**: version 3.12.3
 
@@ -83,7 +80,7 @@ To run this project, follow the steps outlined below. These instructions will gu
 git clone https://github.com/trinerye/visual_analytics_2024.git
 ```
 
-**2.** Change directory to the assignment folder.
+**2.** Change the directory to the assignment folder.
 ```sh
 cd assignment_4
 ```
@@ -104,7 +101,7 @@ source ./A4_env/bin/activate
 # Run the code
 python src/face_detection.py -p 
 
-# Deactivate the enviroment
+# Deactivate the environment
 deactivate
 ```
 
@@ -114,7 +111,7 @@ This project supports several command-line flags to customize the training proce
 
 |Flag      |Shorthand|Description                                                      |Type |Required|
 |----------|---------|-----------------------------------------------------------------|-----|--------|
-| --print  | -p      |Saves an unedidted version of the csv file in the out directory  |bool |FALSE   |
+| --print  | -p      |Saves an unedited  version of the csv file in the out directory  |bool |FALSE   |
 
 ## Results 
 In the ``out`` directory, each newspaper has a folder containing a plot and an unedited and sorted CSV file of the results.
@@ -127,7 +124,7 @@ According to the three plots, the percentage of pages containing faces increases
     <img src="out/JDG/JDG_distribution_across_decades.jpg" alt="JDG" style="width: 32%;"/>
 </div>
 
-A limitation of this approach is that the model is highly inaccurate. It misses several faces in images with multiple people while simultaneously detecting faces that are not there, resulting in false positives. Observations confirm this is the case with many of the earlier images from 1790 to the late 1800s, as the faces, although cartoons, start appearing around the 1870s for JDG, 1890s for IMP, and 1900s for GDL. 
+A limitation of this approach is that the model is highly inaccurate. It misses several faces in images with multiple people while simultaneously detecting faces that are not there, resulting in false positives. Having investigated the images myself, this is the case with many of the earlier images from 1790 to the late 1800s, as the faces, although cartoons, start appearing around the 1870s for JDG, 1890s for IMP, and 1900s for GDL.
 
 Such errors might occur due to the poor quality of the images to which we apply face detection, as many of the images are filled with noise, which likely affects the model’s performance. 
 
