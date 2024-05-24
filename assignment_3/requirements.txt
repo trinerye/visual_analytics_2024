@@ -1,6 +1,7 @@
-matplotlib
-numpy
-scikit-learn
-tensorflow
-tf-keras
-tqdm
+matplotlib==3.9.0
+numpy==1.26.4
+scikit-learn==1.4.2
+tensorflow==2.16.1
+tf_keras==2.16.0
+tqdm==4.66.4
+

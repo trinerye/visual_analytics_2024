@@ -2,25 +2,25 @@
 
 ## About
 
-This project uses transfer learning with the pre-trained ``VGG16`` model to classify images from the ``Tobacco3482`` dataset, comprising scanned black-and-white images across ten classes. Additionally, the ``ImageDataGenerator`` from ``tensorflow`` augments the data due to the small size of some classes in the Tobacco3482 dataset.
+This project uses transfer learning with the pre-trained ``VGG16`` model to classify images from the ``Tobacco3482`` dataset, which consists of  scanned black-and-white images across ten classes. Additionally, the ``ImageDataGenerator`` from ``tensorflow`` augments the data due to the small size of some classes in the Tobacco3482 dataset.
 
-However, before classification, the dataset is split into a train-and-test set using ``scikit-learn``, and the model is modified by removing its existing classification layers and adding custom layers using tensorflow, compiling the layers, and adding labels for the different categories. 
+Before classification, the dataset is split into a train-and-test set using ``scikit-learn``, and the existing classification layers of the model are removed, instead adding custom layers using tensorflow, compiling the layers, and adding labels for the different categories. 
 
 The ``src`` directory contains two scripts:
 
--  **transfer_learning.py:** Trains the CNN and generates a classification report.
+-  **transfer_learning.py:** Adds new classification layers to the VGG16 model, trains it on the Tobacco3482 dataset, and generates a classification report.
 
-- **plotting_tools.py:** Plots the loss curve.
+
+- **plotting_tools.py:** Plots the loss- and accuracy curve, which visualizes how well the  model learns during training
 
 
 ### Data
 
-Download the [Tobacco3482](https://www.kaggle.com/datasets/patrickaudriaz/tobacco3482jpg) dataset from Kaggle and save it in the ``in`` directory. However, the download contains a second Tobacco3482 directory within it, so be sure to remove that before running the code to prevent errors.
+Sign in to Kaggle and download the [Tobacco3482](https://www.kaggle.com/datasets/patrickaudriaz/tobacco3482jpg) dataset. Rename the folder to ``Tobacco3482`` and save it in the ``in`` directory. However, the download contains a second Tobacco3482 directory within it, so be sure to remove that before running the code to prevent errors.
 
 ### Model
 
-
-*The VGG16 model architecture without the classification layers*
+The VGG16 model architecture without the classification layers.
 
 | Parameter      | Value        | Type |
 |----------------|--------------|------|
@@ -68,7 +68,7 @@ If you want replicate this project, follow the steps outlined below. The instruc
 
 ### Pre-Requisites
 
-*Please makes sure to install the following requirements before running the script.*
+*Please make sure to install the following requirements before running the script.*
 
 **Python**: version 3.12.3
 
@@ -79,7 +79,7 @@ If you want replicate this project, follow the steps outlined below. The instruc
 git clone https://github.com/trinerye/visual_analytics_2024.git
 ```
 
-**2.** Change directory to the assignment folder.
+**2.** Change the directory to the assignment folder.
 ```sh
 cd assignment_3
 ```
@@ -100,7 +100,7 @@ source ./A3_env/bin/activate
 # Run the code
 python src/transfer_learning -e 20 -p
 
-# Deactivate the enviroment
+# Deactivate the environment
 deactivate
 ```
 
@@ -115,11 +115,11 @@ This project supports several command-line flags which customizes the training p
 
 ## Results 
 
-In the ``out`` directory, you can find a plot of the loss and accuracy curve illustrating the model's performance on the training and validation data, together with a classification report showing how accurate the model is at predicting which of the ten classes the test data belongs to. 
+In the ``out`` directory, you can find a plot of the loss and accuracy curve illustrating the model's performance on the training and validation data, together with a classification report showing how accurate the model is at classifying the data.
 
 ![plot](out/loss_curve.png)
 
-In the first plot, **the training and validation loss curves decrease**, which tells us that the model is learning and adjusting its weights accordingly to correct errors and enhance overall performance. However, in the second plot, **the training and validation accuracy curves increase**, which indicates that the model becomes more accurate in its predictions as the epochs progress. Furthermore, the short distance between the training and the validation curve indicates that the model generalizes the validation data well without overfitting the training data (Muralidhar, 2023). **In conclusion, while loss decreases, accuracy increases, suggesting that the model is effectively learning the patterns in the data.** 
+In the first plot, **the training and validation loss curves decrease**, which tells us that the model is learning and adjusting its weights accordingly to correct errors and enhance overall performance. In the second plot, on the other hand, **the training and validation accuracy curves increase**, which indicates that the model becomes more accurate in its predictions as the epochs progress. Furthermore, the short distance between the training and the validation curve indicates that the model generalizes the validation data well without overfitting the training data (Muralidhar, 2023). **In conclusion, while loss decreases, accuracy increases, suggesting that the model effectively learns the patterns in the data.** 
 
 When examining the classification report in the ``out`` directory, we see that the test data is unbalanced, with some classes being larger than others. In such instances, the weighted average might be the preferred metric as it accounts for this difference in the dataset, giving “more importance to the classes that have more data” (Prasanna, 2024).
 
@@ -127,7 +127,7 @@ When examining the classification report in the ``out`` directory, we see that t
 |----------------|------------|------|--------|
 |weighted average|0.74        |0.73  |0.73    |
 
-Nevertheless, the model performs well on the test data with a weighted F1-score of 0.73, suggesting that the model is significantly accurate at predicting the correct image labels.
+Nevertheless, the model performs well on the test data, with a weighted F1-Score of 0.73, suggesting that it is relatively accurate at predicting the correct image labels.
 
 ### Limitations and future improvements 
 
