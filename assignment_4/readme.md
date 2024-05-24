@@ -117,8 +117,9 @@ This project supports several command-line flags to customize the training proce
 | --print  | -p      |Saves an unedidted version of the csv file in the out directory  |bool |FALSE   |
 
 ## Results 
+In the ``out`` directory, each newspaper has a folder containing a plot and an unedited and sorted CSV file of the results.
 
-Write something here
+According to the three plots, the percentage of pages containing faces increases over time, likely due to technological advancements such as cameras, video recorders, and telephones, causing modern newspapers to contain more images than their older counterparts.
 
 <div style="display: flex; justify-content: space-around;">
     <img src="out/GDL/GDL_distribution_across_decades.jpg" alt="GDL" style="width: 32%;"/>
@@ -126,10 +127,15 @@ Write something here
     <img src="out/JDG/JDG_distribution_across_decades.jpg" alt="JDG" style="width: 32%;"/>
 </div>
 
-Describe what you see
+A limitation of this approach is that the model is highly inaccurate. It misses several faces in images with multiple people while simultaneously detecting faces that are not there, resulting in false positives. Observations confirm this is the case with many of the earlier images from 1790 to the late 1800s, as the faces, although cartoons, start appearing around the 1870s for JDG, 1890s for IMP, and 1900s for GDL. 
+
+Such errors might occur due to the poor quality of the images to which we apply face detection, as many of the images are filled with noise, which likely affects the model’s performance. 
 
 ### Limitations and future improvements 
-Rescale the images, dog skal man være opmærksom på at det kan gøre det endnu svære for modellen at genkende ansigter
+
+- To prevent this, one might need to preprocess the images even better before feeding them to the model, experimenting with different thresholds from opencv to reduce noise.
+
+- Also, the run time is extensive, taking nearly four hours to run on a 16-CPU machine. Rescaling the images will likely reduce the time spent, although the potential loss of information might make it harder for the model to detect faces. 
 
 ## References
 
