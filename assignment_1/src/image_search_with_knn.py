@@ -128,7 +128,7 @@ def save_plot(filepaths, args, index, files, dist, out_folderpath):
 def main():
     # Creates the folder paths
     in_folderpath = os.path.join("in", "flowers")
-    out_folderpath = os.path.join("out", "knn_images")
+    out_folderpath = os.path.join("out")
     os.makedirs(out_folderpath, exist_ok=True)
 
     # Creates filenames and filepaths for each image
@@ -152,7 +152,7 @@ def main():
 
     # Creates and saves the plot if the --print flag is added when running the script
     if args.print:
-        print(f"Saving plot in the 'out' folder")
+        print(f"Saves a plot and stores it in the 'out' directory")
         save_plot(filepaths, args, index, files, dist, out_folderpath)
     else:
         # If not it prints a message to the screen explaining how to add the flag 

@@ -1,6 +1,5 @@
 import os
 import cv2
-import numpy as np
 import pandas as pd
 import argparse
 from tqdm import tqdm
@@ -51,20 +50,22 @@ def compare_histograms(in_folderpath, chosen_norm_hist):
     # Iterates over each file in the directory
     for file in tqdm(dirs, desc="Compares images"):
 
-        # Adds the name of the image to a list
-        filenames.append(file)
+        if file.endswith('jpg'):
 
-        # Creates a filepath for each image 
-        filepath = os.path.join(in_folderpath, file)
+            # Adds the name of the image to a list
+            filenames.append(file)
 
-        # Calls the create_histogram function to create a color histogram of all the images in the directory
-        norm_hist = create_histogram(filepath)
+            # Creates a filepath for each image 
+            filepath = os.path.join(in_folderpath, file)
 
-        # Compares the selected image with all the other images and calculate the distance between them
-        comparison = round(cv2.compareHist(chosen_norm_hist, norm_hist, cv2.HISTCMP_CHISQR), 2)
+            # Calls the create_histogram function to create a color histogram of all the images in the directory
+            norm_hist = create_histogram(filepath)
 
-        # Adds the result to a list
-        distances.append(comparison)
+            # Compares the selected image with all the other images and calculate the distance between them
+            comparison = round(cv2.compareHist(chosen_norm_hist, norm_hist, cv2.HISTCMP_CHISQR), 2)
+
+            # Adds the result to a list
+            distances.append(comparison)
 
     return filenames, distances
 
@@ -112,7 +113,7 @@ def main():
 
     # Creates the folder paths
     in_folderpath = os.path.join("in", "flowers")
-    out_folderpath = os.path.join("out", "cv2_images")
+    out_folderpath = os.path.join("out")
     os.makedirs(out_folderpath, exist_ok=True)
     
     # Filepath for the selected image
@@ -129,7 +130,7 @@ def main():
 
     # Creates and saves the plot if the --print flag is added when running the script
     if args.print:
-        print(f"Saving plot in the 'out' folder")
+        print(f"Saves a plot and stores it in the 'out' directory")
         save_plot(sorted_df, in_folderpath, out_folderpath)
     else:
        # If not it prints a message to the screen explaining how to add the flag 
