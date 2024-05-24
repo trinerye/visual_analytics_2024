@@ -67,7 +67,7 @@ def load_and_process_images(in_folderpath):
 
    return np.array(images), np.array(labels) # Returns the lists as np.arrays
 
-def process_labels(images, labels):
+def process_labels(y_train, y_test):
 
    # Initializes the LabelBinarizer obejct
    lb = LabelBinarizer()
@@ -183,7 +183,7 @@ def main():
    X_train, X_test, y_train, y_test = train_test_split(images, labels, test_size=0.2, random_state=42)
    
    # Preprocesses the labels to fit the model
-   y_train, y_test = process_labels(images, labels)
+   y_train, y_test = process_labels(y_train, y_test)
 
    # Initilizes the model with new classification layers
    model = setup_model(args)
