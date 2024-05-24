@@ -8,7 +8,7 @@ The ``src`` directory contains two scripts:
 
 - **image_search_with_cv2.py:** Creates a normalized color histogram for each flower, calculates the distances between the target flower and the dataset, and returns the closest matches to the target flower.
 
-- **image_search_with_knn.py:** Extracts features from each image in the dataset and uses the``kneighbors()`` function to calculate the distances between the target flower and the dataset to find the nearest neighbors.
+- **image_search_with_knn.py:** Extracts features from each image in the dataset and uses the ``NearestNeighbors()`` classifier to calculate the distances between the target flower and the dataset to find the nearest neighbors.
 
 
 ### Data
@@ -17,11 +17,16 @@ Download the [17 Category Flower Dataset](https://www.robots.ox.ac.uk/~vgg/data/
 
 ### Model
 
-*For this project, the VGG16 model is loaded without the top classification layers, marking the remaining layers as nontrainable while adding the following layers to enhance model performance.*
+According to the documentation, the [cv2.compareHist()](https://docs.opencv.org/3.4/d8/dc8/tutorial_histogram_comparison.html) uses chi-square statistics to measure the distances between the target image and the dataset. On the other hand, the [NearestNeighbors()](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.NearestNeighbors.html#sklearn.neighbors.NearestNeighbors.kneighbors) model compares the target image with the dataset by calculating the Euclidean distance between the one-dimensional vectors to find the nearest neighbours.
 
-NearestNeighbors() and `kneighbors()`` function
+However, before calculating the Euclidian distance, we must extract the features from the images using the VGG16 CNN with the following parameters. 
 
-*Husk at opdatere filepaths og rename them og dobbeltjek fil download. Jeg kan se at de indeholder tekstfiler, så husk at rette if endswith til jpg*
+| Parameter      | Value        | Type | 
+|----------------|--------------|------|
+| weights        | imagenet     | str  |
+| include_top    | False        | bool |
+| pooling        | avg          | str  |        
+| input_shape    | (224, 224, 3)| int  |
 
 ##  File Structure
 
@@ -56,6 +61,8 @@ If you want replicate this project, follow the steps outlined below. The instruc
 
 **Python**: version 3.12.3
 
+*Remember to do and write something about  why I download opencv headless, and that you have to type `Y` to run the installation*
+
 ### Installation
 
 **1.** Clone the repository using Git.
@@ -68,13 +75,12 @@ git clone https://github.com/trinerye/visual_analytics_2024.git
 cd assignment_1
 ```
 
-**3.** Run ``setup.sh`` to install the dependencies needed for this project. 
+**3.** Run ``setup.sh`` to create an environment and install the dependencies needed for this project. 
 ```sh
 bash setup.sh
 ```
 **4.** Run ``run.sh`` to activate the environment and run the main script. 
-
-*Select the script you want to run and comment out the other one.  
+  
 ```sh
 bash run.sh
 ```
@@ -84,7 +90,7 @@ bash run.sh
 source ./A1_env/bin/activate
 
 # Run the code
-python src/image_search_algorithm.py -i "image_1357.jpg" -p &
+python src/image_search_algorithm.py -i "image_1357.jpg" -p 
 python src/image_search_with_knn.py -i 249 -p
 
 # Deactivate the enviroment
@@ -95,15 +101,16 @@ deactivate
 
 This project supports several command-line flags to customize the training process. *See table for reference.*
 
-*For the cv2 script*
+>**Color histogram comparison (cv2)**
 
 |Flag      |Shorthand|Description                                                                     |Type|Required|
 |----------|---------|--------------------------------------------------------------------------------|----|--------|
 | --image  | -i      |Filename of the image you want to compare with the dataset, e.g. image_0001.jpg |str |TRUE    |
 | --print  | -p      |Saves a plot of the results in the out directory                                |bool|FALSE   |
 
-*For the knn script*
+<br>
 
+>**K-Nearest Neighbor**
 
 |Flag      |Shorthand|Description                                                                        |Type|Required|
 |----------|---------|-----------------------------------------------------------------------------------|----|--------|
@@ -112,22 +119,20 @@ This project supports several command-line flags to customize the training proce
 
 ## Results 
 
-Write something here
+You can find a CSV file and a plot of the image comparison results in the ``out`` directory.
 
-### Comparisons
+>**Color histogram comparison (cv2)**
 
-*Remember to update the filepath once I run the script again*
+![plot](out/cv2_image_comparison_plot.png)
 
-![plot](out/cv2_images/image_comparison_plot.png)
+<br>
 
-![plot](out/knn_images/image_comparison_plot.png)
+>**K-Nearest Neighbor**
 
-Something about how the image search algorithm is faster, but the knn prediction is more accurate.
+![plot](out/knn_image_comparison_plot.png)
 
+Since the Euclidian distance is calculated on based on feature extractions rather than a probability distribution, the nearest neighbor classifier has access to more information about the images than just the distribution of colors. Although the simplicity of the image data makes the CV2 approach faster, the KNN prediction is more accurate, as elements such as background colours and other noise influence the result of the colour histogram comparison more than the actual flower itself. 
 
-### Limitations and future improvements 
-
-...
 
 
 
