@@ -104,7 +104,7 @@ git clone https://github.com/trinerye/visual_analytics_2024.git
 cd assignment_2
 ```
 
-**3.** Run ``setup.sh`` to install the dependencies needed for this project. 
+**3.** Run ``setup.sh`` to create an environment and install the dependencies needed for this project. 
 ```sh
 bash setup.sh
 ```
@@ -155,7 +155,7 @@ Nevertheless, neither one performs exceptionally well, with a weighted F1-Score 
 Looking at the loss curve belonging to the neural network classifier, one immediately notices that the validation loss curve is missing, as scikit-learn does not have a validation subset like tensorflow. As such, we cannot guarantee that the model is not overfitting on the data. **However, we can say that the model is learning from the training data as the loss curve decreases when the epochs progress.**
 
 ### Limitations and future improvements 
-- Another model architecture, such as a convolutional neural network (CNN), might be more suitable for such classification tasks. For instance, the VGG16 model from TensorFlow Keras takes a multi-dimensional tensor as input, thus eliminating the need to flatten the image data into a grayscale colour space.
+- Another model architecture, such as a convolutional neural network (CNN), might be more suitable for such classification tasks. For instance, the VGG16 model from ``tensorflow.keras.applications`` takes a multi-dimensional tensor as an input, thus eliminating the need to flatten the image data into a grayscale colour space.
 
 - Another way to enhance the performance could be to conduct a grid search using the ``GridSearchCV`` function from scikit-learn, which finds the optimal parameters for training each model. 
 
