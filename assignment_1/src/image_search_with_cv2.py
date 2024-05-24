@@ -1,7 +1,7 @@
 import os
-import cv2
 import pandas as pd
 import argparse
+import cv2
 from tqdm import tqdm
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg

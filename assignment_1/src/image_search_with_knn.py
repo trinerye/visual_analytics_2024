@@ -1,8 +1,8 @@
 import os
-import argparse
-from tqdm import tqdm
 import pandas as pd
 import numpy as np
+import argparse
+from tqdm import tqdm
 from sklearn.neighbors import NearestNeighbors
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 from tensorflow.keras.applications.vgg16 import VGG16, preprocess_input
