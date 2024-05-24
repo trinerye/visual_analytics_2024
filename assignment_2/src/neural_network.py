@@ -1,4 +1,5 @@
 import os
+import numpy as np
 from sklearn import metrics
 from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import classification_report
@@ -9,7 +10,7 @@ from preprocessing_images import load_data, preprocess_images
 
 # This function initializes the neural network classifier and fits it to the training data
 def train_model(X_train_processed, y_train_processed):
-    classifier = MLPClassifier(hidden_layer_sizes = (128,), max_iter=1000, random_state = 42, early_stopping=True)
+    classifier = MLPClassifier(activation = "logistic", solver='adam', hidden_layer_sizes = (128,), tol=0.0001, max_iter=200, random_state = 42, early_stopping=True, verbose=1) 
     classifier.fit(X_train_processed, y_train_processed)
     return classifier
 

@@ -6,6 +6,7 @@ from tensorflow.keras.datasets import cifar10
 
 def load_data():
     # Loads the cifar10 dataset
+    print("Loading data")
     return cifar10.load_data()
 
 def preprocess_images(images, labels): 

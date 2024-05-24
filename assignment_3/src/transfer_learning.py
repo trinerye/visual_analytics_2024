@@ -24,7 +24,7 @@ def parser():
                      "-e",
                      type=int,
                      required=True,
-                     help="Specify the amount of epochs you want for the model e.g. 12")
+                     help="Specify the amount of epochs you want for the model e.g. 20")
    
    # Defines the CLI argument that creates and saves a model summary in the outfolder (OPTIONAL)
    parser.add_argument("--print",
@@ -81,9 +81,9 @@ def setup_model(args):
    # Add new classifier layers
    flat1 = Flatten()(model.layers[-1].output)
    bn = BatchNormalization()(flat1)
-   drop = Dropout(0.1)(bn)
-   class1 = Dense(128, activation='relu')(drop)
-   output = Dense(10, activation='softmax')(class1)
+   class1 = Dense(128, activation='relu')(bn)
+   drop = Dropout(0.1)(class1)
+   output = Dense(10, activation='softmax')(drop)
 
    # Define new model
    model = Model(inputs=model.inputs, outputs=output)
@@ -100,7 +100,6 @@ def compile_model(model):
                                                                 decay_steps=10000,
                                                                 decay_rate=0.9)
    
-   # sgd = SGD(learning_rate=lr_schedule) use argparse to choose the optimizer  # arg
    adam = Adam(learning_rate=lr_schedule)
 
    model.compile(optimizer=adam, loss='categorical_crossentropy', metrics=['accuracy'])
@@ -169,7 +168,7 @@ def main():
 
    H = train_model(datagen, model, X_train, y_train, args)
 
-   plot_history(H, args.epochs, out_folderpath) # argparse here
+   plot_history(H, args.epochs, out_folderpath) 
 
    classifier_metrics = evaluate_model(model, X_test, y_test)
 

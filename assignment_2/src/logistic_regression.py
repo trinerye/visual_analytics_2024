@@ -10,7 +10,7 @@ from preprocessing_images import load_data, preprocess_images
 
 # This function initializes the logistic regression classifier and fits it to the training data
 def train_model(X_train_processed, y_train_processed):
-    classifier = LogisticRegression(tol=0.1, solver='saga', multi_class='multinomial', random_state=42)
+    classifier = LogisticRegression(tol=0.1, solver='saga', multi_class='multinomial', random_state=42, early_stopping=True, verbose=1)
     classifier.fit(X_train_processed, y_train_processed)
     return classifier
 
@@ -43,14 +43,12 @@ def main():
     report_path = os.path.join(out_folderpath, "logistic_regression_classification_report.txt")
   
     # Loads the data
-    print("Loading data")
     (X_train, y_train), (X_test, y_test) = load_data()
  
     # List of labels
     labels = ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"]
 
     # Preprocesses the training and test images and labels 
-    print("Processing images and labels")
     X_train_processed, y_train_processed = preprocess_images(X_train, y_train) 
     X_test_processed, y_test_processed = preprocess_images(X_test, y_test) 
 
