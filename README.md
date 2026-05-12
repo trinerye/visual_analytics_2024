@@ -1,10 +1,8 @@
 # Visual_analytics_2024
 
-### Assignment 1: Simple image search algorithm
+This repo contains all the code for my portfolio assignments for the course *Visual Analytics* (F24).
 
-### Assignment 2: Classification benchmarks with Logistic Regression and Neural Networks
-
-### Assignment 3: Transfer learning with pretrained CNNs
+To view the results of each assignment, please navigate to the corresponding assignment folder, where you’ll find the relevant analyses, visualizations, and documentation. Each folder contains the code and materials specific to that project.
 
 
 
